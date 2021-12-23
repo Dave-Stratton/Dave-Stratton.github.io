@@ -3,16 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HP Lovecraft Project</title>
+    <link rel="stylesheet" href="style.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gwendolyn&display=swap');
+        * {
+            color: whitesmoke;
+            text-align: center;
+            position: relative;
+            font-family: fantasy
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            background-color: magenta;
+            margin: 0;
+            background-color: black;
+        }
+        .Cthulhu {
+            min-height: 62vh;
+            background: linear-gradient(darkblue, black);
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .Cthulhu img {
+            position: absolute;
+            left:0;
+            width: 100vw;
+            height: auto;
+        }
+        .Cthulhu #eyewrapper {
+            position: absolute;
+            height: 10vh;
+            width: 18vw;
+            left: 39vw;
+            top: 24vh;
+        }
+        .Cthulhu:hover #eye1 {
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+        .Cthulhu:hover #eye2 {
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+        .Cthulhu #eye1 {
+            border-radius: 100%;
+            height: 5vh;
+            width: 7vw;
+            left: 1vw;
+            background-color: black;
+            position: absolute;
+            transform: rotate(45deg);
+            box-shadow: 0 0 40px 30px #000000;
+        }
+        .Cthulhu #eye2 {
+            border-radius: 100%;
+            height: 5vh;
+            width: 7vw;
+            background-color:  black;
+            position: absolute;
+            left: 15vw;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 40px 30px #000000;
+        }
+        #openQuote {
+            background-color: rgb(27, 47, 66);
+            width: 100vw;
+            position: relative;
+            top: -5vh;
+        }
+        #openQuote h1 {
+            color: crimson;
+            font-family: 'Gwendolyn', cursive;
+            text-align: center;
+        }
+        #authorBackground {
+            font-size: 30px;
+            width: 100vw;
+        }
+        .wave #back{
+            overflow: hidden;
+            background: linear-gradient(aqua, blue);
+            width: 100vw;
+            height: 25vh;
+            top: 12.5vh;
+            z-index:0;
+            position: relative;
+        }
+        .wrapper {
+            position: relative;
+            top: -25vh;
+            width: 100vw;
+        }
+
+        .wave #wave1 {
+            background-color: black;
+            border-radius: 100%;
+            width: 50vw;
+            height: 25vh;
+            position: absolute;
+            left: -25vw;
+            z-index: 10;
+            animation: wave1 4s ease-in-out infinite alternate;
+        }
+        .wave #wave2 {
+            background-color: black;
+            border-radius: 100%;
+            width: 50vw;
+            height: 25vh;
+            position: absolute;
+            left: 25vw;
+            z-index: 10;
+            animation: wave2 4s ease-in-out infinite alternate;
+        }
+        .wave #wave3 {
+            background-color: black;
+            border-radius: 100%;
+            width: 50vw;
+            height: 25vh;
+            position: absolute;
+            left: 75vw;
+            z-index: 10;
+            animation: wave3 4s ease-in-out infinite alternate;
+        }
+        #fixer {
+            transform: translateY(10vh);
+            height: 15vh;
+        }
+        #connection1 {
+            font-size: 25px;
+            border-width: 10px;
+            border-style: ridge;
+            border-color: crimson;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            to {box-shadow: 0 0 40px 30px #ff0000; background-color: rgb(255,0,0);}
+        }
+        @keyframes wave1 {
+            to {left: 0;}
+        }
+        @keyframes wave2 {
+            to {left: 50vw;}
+        }
+        @keyframes wave3 {
+            to {left: 100vw;}
         }
     </style>
 </head>
 <body>
-    <h2>It works!</h2>
-    <p>and so does this!</p>
-    <!-- this is a test to see if comments make the website publish right-->
+    <div class="Cthulhu">
+        <img src="https://blizzardwatch.com/wp-content/uploads/2020/06/cthulhu.png">
+        <div id="eyewrapper">
+            <div id="eye1"></div>
+            <div id="eye2"></div>
+        </div>
+    </div>
+    <div id="openQuote"><h1>“The oldest and strongest emotion of mankind is fear, and the oldest and strongest kind of fear is fear of the unknown” - H.P. Lovecraft</h1></div>
+    <div id="authorBackground"><p>H.P. Lovecraft was haunted by graphic images in his dreams of monsters and realms beyond our own. He transformed them into stories. These stories were transformed again into one of the most extensive and horrific universes that human eyes have laid eyes upon.</p></div>
+    <div class="wave">
+        <div id="back"></div>
+        <div class="wrapper">
+            <div id="wave1"></div>
+            <div id="wave2"></div>
+            <div id="wave3"></div>
+        </div>
+    </div>
+    <div id="fixer"></div>
+    <div id="connection1"><h2><b>The Origins</b></h2><p>H.P. Lovecraft connects his many works into one large work. The connections within his expansive universe is demonstrated clearly in <i>At the Mountains of Madness.</i></p><p>The main character, William Dyer, narrates about what he sees on the walls of the lost city in the frigid mountains in Antarctica. He speaks of the Great Old Ones and how they came from space and created life on Earth. He mentions how the Great Old Ones made the creatures that we know today, so they could have something to eat. They also made…</p></div>
+    <script src="main.js"></script>
 </body>
 </html>
