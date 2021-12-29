@@ -162,6 +162,11 @@
         #necronomicon:hover {
             animation: rotate 3s ease-in-out infinite alternate;
         }
+        #tentacle {
+            width: 160vw;
+            height: 60vh;
+            animation: shmoov 3s ease-in-out infinite alternate;
+        }
 
         /* Animations */
         @keyframes glow {
@@ -178,6 +183,9 @@
         }
         @keyframes rotate {
             to{transform: rotate(3600deg); box-shadow: 0 0 200px 180px #af0606;}
+        }
+        @keyframes shmoov {
+            to {transform: translateX(-60vw); height: 70vh;}
         }
     </style>
 </head>
@@ -203,6 +211,7 @@
     <div id="content">
         <div id="theme"><h2><b>Theme</b></h2><p>Within H.P Lovecraft’s fantastical stories, there is an overarching theme that is prevalent in each one. That theme is that a person who searches too far into the unknown will surely find something that no one would ever want to find, and is a truly terrifying thing to behold. This theme is perfectly exemplified in the <em>Statement of Randolph Carter</em>, in which Randolph Carter assists his friend Harley Warren in exploring a catacomb by staying on the surface with a communicative instrument. All Carter can do is listen to Warren as Warren explores deeper until he encounters something unexplainable. Carter refuses to seal the tomb after Warren demands that he shuts it to keep the unexplainable “thing” that is chasing him. Carter ultimately does not shut the entrance to the catacomb and passes out when he hears the “thing’s” voice. In this story, Warren, being an explorer and a man of science, ventured too far into the unknown and ended up dying as a result.
         </p></div>
+        <img id="tentacle" src="Imgs/Cthulhu_Tentacle.png">
         <div id="university"><h2><b>Overlaping Stories</b></h2><p>The Miskatonic University was seen many times throughout Lovecraft’s stories. Many characters are directly related to the University as well.</p>
             <ul>
                 <li><em>At the Mountains of Madness</em> - William Dyer, Danforth, Frank Pabodie, Lake, Atwood</li>
