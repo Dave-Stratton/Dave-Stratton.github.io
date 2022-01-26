@@ -22,6 +22,17 @@
         body {
             margin: 0;
         }
+        #note {
+            font-size: 8px;
+        }
+        button {
+            color: rgb(85, 83, 83);
+            background-color: rgb(0, 255, 221);
+            border-color:rgb(0, 255, 221);
+        }
+        a {
+            color:rgb(255, 0, 0);
+        }
     </style>
 </head>
 <body>
@@ -48,7 +59,9 @@
         <br>
         <br>
         <a href="https://external-preview.redd.it/DJ7FsebtiLgB0dEuBEplRjXbgT_l-oAdH38X7FEO67k.jpg?auto=webp&s=de843098fe9c2bb537b19ecdd14d5c8ae115b283" target="blank_"><p>Click here to smile</p></a>
+        <button onclick="createOppossum()">Click Here to Laugh</button>
         <p><!--Put some sappy text here--></p>
+        <p id="note">To remove Oppossums from the screen just refresh</p>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
     <script src="main.js"></script>
