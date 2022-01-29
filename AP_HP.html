@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP Lovecraft Project</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gwendolyn&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gwendolyn&family=Oooh+Baby&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
+        * {
+            color: whitesmoke;
+            text-align: center;
+            position: relative;
+            font-family: 'Lora', serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            background-color: black;
+            overflow-x: hidden;
+        }
+        .Cthulhu {
+            min-height: 62vh;
+            background: linear-gradient(darkblue, black);
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .Cthulhu img {
+            position: absolute;
+            left:0;
+            width: 100vw;
+            height: auto;
+        }
+        .Cthulhu #eyewrapper {
+            position: absolute;
+            height: 10vh;
+            width: 18vw;
+            left: 39vw;
+            top: 27vh;
+        }
+        .Cthulhu:hover #eye1 {
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+        .Cthulhu:hover #eye2 {
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+        .Cthulhu #eye1 {
+            border-radius: 100%;
+            height: 5vh;
+            width: 7vw;
+            left: 1vw;
+            background-color: black;
+            position: absolute;
+            transform: rotate(45deg);
+            box-shadow: 0 0 40px 30px #000000;
+        }
+        .Cthulhu #eye2 {
+            border-radius: 100%;
+            height: 5vh;
+            width: 7vw;
+            background-color:  black;
+            position: absolute;
+            left: 15vw;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 40px 30px #000000;
+        }
+        #openQuote {
+            background-color: rgb(27, 47, 66);
+            width: 100vw;
+            position: relative;
+            top: -5vh;
+        }
+        #openQuote h1 {
+            font-size: 35px;
+            color: crimson;
+            font-family: 'Gwendolyn', cursive;
+            text-align: center;
+        }
+        #authorBackground {
+            font-size: 40px;
+            width: 95vw;
+        }
+        .wave #back{
+            overflow: hidden;
+            background: linear-gradient(aqua, blue);
+            width: 100vw;
+            height: 25vh;
+            top: 12.5vh;
+            z-index:0;
+            position: relative;
+        }
+        .wrapper {
+            position: relative;
+            top: -25vh;
+            width: 100vw;
+        }
+
+        .wave #wave1 {
+            background-color: black;
+            border-radius: 100%;
+            width: 50vw;
+            height: 25vh;
+            position: absolute;
+            left: -25vw;
+            z-index: 10;
+            animation: wave1 4s ease-in-out infinite alternate;
+        }
+        .wave #wave2 {
+            background-color: black;
+            border-radius: 100%;
+            width: 50vw;
+            height: 25vh;
+            position: absolute;
+            left: 25vw;
+            z-index: 10;
+            animation: wave2 4s ease-in-out infinite alternate;
+        }
+        .wave #wave3 {
+            background-color: black;
+            border-radius: 100%;
+            width: 50vw;
+            height: 25vh;
+            position: absolute;
+            left: 75vw;
+            z-index: 10;
+            animation: wave3 4s ease-in-out infinite alternate;
+        }
+        #fixer {
+            transform: translateY(10vh);
+            height: 15vh;
+        }
+        #theme {
+            font-size: 35px;
+            border-width: 10px;
+            border-style: groove;
+            border-radius: 10%;
+            border-color: crimson;
+        }
+        #university {
+            font-size: 35px;
+            border-width: 10px;
+            border-style: ridge;
+            border-radius: 10%;
+            border-color: rgb(48, 81, 230);
+        }
+        #mythos {
+            font-size: 35px;
+            border-width: 10px;
+            border-style: double;
+            border-radius: 10%;
+            border-color: rgb(31, 129, 88);
+        }
+        #final_remarks {
+            font-size: 30px;
+            border-width: 10px;
+            border-style: double;
+            border-radius: 10%;
+            border-color: purple;
+        }
+        #necronomicon {
+            width: 400px;
+            height: auto;
+            box-shadow: 0 0 0px 0px #af0606;
+        }
+        #necronomicon:hover {
+            animation: rotate 3s ease-in-out infinite alternate;
+        }
+        #tentacle {
+            width: 160vw;
+            height: 60vh;
+            animation: shmoov 3s ease-in-out infinite alternate;
+        }
+        #hp {
+            width: 300px;
+            height: auto;
+        }
+        #finalQuote {
+            background-color: #000000;
+            
+        }
+        #finalQuote p {
+            font-size: 35px;
+            font-family: 'Gwendolyn', cursive;
+            color: crimson;
+        }
+        #storyList {
+            border-top: 10px ridge gray;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            to {box-shadow: 0 0 40px 30px #ff0000; background-color: rgb(255,0,0);}
+        }
+        @keyframes wave1 {
+            to {left: 0;}
+        }
+        @keyframes wave2 {
+            to {left: 50vw;}
+        }
+        @keyframes wave3 {
+            to {left: 100vw;}
+        }
+        @keyframes rotate {
+            to{transform: rotate(3600deg); box-shadow: 0 0 200px 180px #af0606;}
+        }
+        @keyframes shmoov {
+            to {transform: translateX(-50vw) rotate(10deg);}
+        }
+    </style>
+</head>
+<body>
+    <div class="Cthulhu">
+        <img src="https://blizzardwatch.com/wp-content/uploads/2020/06/cthulhu.png">
+        <div id="eyewrapper">
+            <div id="eye1"></div>
+            <div id="eye2"></div>
+        </div>
+    </div>
+    <div id="openQuote"><h1>“The oldest and strongest emotion of mankind is fear, and the oldest and strongest kind of fear is fear of the unknown” - H.P. Lovecraft</h1></div>
+    <div id="authorBackground"><p>As he slept, H.P. Lovecraft was haunted by graphic images of monsters and realms beyond our own. He transformed these horrors into stories. Over nearly a century these stories have evolved into one of the most extensive and horrific universes that humans have laid eyes upon.</p></div>
+    <div class="wave">
+        <div id="back"></div>
+        <div class="wrapper">
+            <div id="wave1"></div>
+            <div id="wave2"></div>
+            <div id="wave3"></div>
+        </div>
+    </div>
+    <div id="fixer"></div>
+    <div id="content">
+        <div id="theme"><h2><b>Theme</b></h2><p>Within H.P Lovecraft’s fantastical stories, there is an overarching theme that is prevalent in each one. That theme is that a person who searches too far into the unknown will surely find something that no one would ever want to find, and is a truly terrifying thing to behold. This theme is perfectly exemplified in the <u>Statement of Randolph Carter</u>, in which Randolph Carter assists his friend Harley Warren in exploring a catacomb by staying on the surface with a communicative instrument. All Carter can do is listen to Warren as Warren explores deeper until he encounters something unexplainable. Carter refuses to seal the tomb after Warren demands that he shuts it to contain the unexplainable “thing” that is chasing him. Carter ultimately does not shut the entrance to the catacomb and passes out when he hears the “thing’s” voice say that Warren is dead. In this story, Warren, being an explorer and a man of science, ventured too far into the unknown and ended up dying as a result.
+        </p></div>
+        <img id="tentacle" src="Imgs/Cthulhu_Tentacle.png">
+        <div id="university"><h2><b>Overlaping Stories</b></h2><p>The Miskatonic University was seen many times throughout Lovecraft’s stories. Many characters are directly related to the University as well.</p>
+            <ul>
+                <li><u>At the Mountains of Madness</u> - William Dyer, Danforth, Frank Pabodie, Lake, Atwood</li>
+                <li><u>The Dunwich Horror</u> - Dr. Henry Armitage, Dr. Francis Morgan, Professor Warren Rice
+                </li>
+                <li><u>Herbert West - Reanimator</u> - Dr. Allen Halsey</li>
+            </ul>
+            <p>This once again relates to the theme that men went too deep in the unknown. All the members of the college that appear in these stories of unexplainable terror are people of science whose purpose is to explore deeper into the fundamental existence of the world. In the story <u>At the Mountains of Madness</u> Professor William Dyer and his other colleagues explore Antarctica. Their journey ends in a momentous failure as the party discovers ancient creatures, and the shapeless mass known as a shoggoth also appears in another Lovecraft story called The Shadow over Innsmouth. In <u>the Dunwich Horror</u> the three characters all are employed by the Miskatonic University. Together they face the "Dunwich Horror" which is said to have dozens of legs that are as big as barrels, has big eyes all over it and ten or twenty grey mouths of trunks on its side with blue or purple rings over them that are as big as ovenpipes. On top of the creature, there is half a face, which lacks a chin, has red eyes and white, frizzly albino hair. Finally in <u>Herbert West Reanimator,</u> The Dean of the Miskatonic University, Dr. Allen Halsey, was not involved in the unknown by first hand experience. Halsey dies from overwork in a typhoid epidemic. However in a twisted act of respect Herbert West steals the corpse of Halsey to reanimate. In these three stories The main characters all hail from the same University. The Necronomicon is also related to these characters. In <u>the Dunwich Horror</u> it is seen numerous times from the Voorish sign, the instructions for making the powder of Ibn Ghanzi, and the summoning of Yog-Sogoth are all included in the Dunwich Horror. The necronomicon is the book containing acrance and forbidden knowledge whose contents drive men mad. The necronomicon appears throughout many of Lovecrafts stories, particularly the copy in the Library of Miskatonic University. 
+            </p>
+        </div>
+        <img id="necronomicon" src="https://st3.depositphotos.com/3325457/18056/i/1600/depositphotos_180568698-stock-photo-open-magic-book-evil-symbols.jpg">
+        <br>
+        <caption>- Illustration of the Necronomicon</caption>
+        <div id="mythos">
+            <h2><b>Mythos</b></h2>
+            <p>In <u>At the Mountains of Madness</u>, the tale of the Great Old Ones is deciphered by William Dyer. The Old Ones originally came to Earth because they found their previous planet emotionally unsatisfying. When they came to the water-covered Earth, they created the shoggoths as a food source. Eventually, the Shoggoths became the builders of the Old Ones’ cities and would expand the Old Ones across the planet. Some shoggoths underwent evolution, becoming the animals and vegetation that would dominate the planet millions of years later. When Cthulhu, a god similar to the Great Old Ones, arrived, it brought its legion of octopus like beings and waged war against the Old Ones. Cthulhu won the war and claimed all the newly formed land on Earth. Suddenly the city of R'lyeh sank along with Cthulhu and his spawn. The Old Ones once again ruled Earth, but it was not long before another war broke out. The Old Ones won this war, but the Earth began a state of rapid geological change. The shifting nature of the planet destroyed most of the Old One’s cities, except for the sunken city of R’lyeh and the city that William Dyer explored in Antarctica. 
+            </p>
+            <p>The sinking of R’lyeh is not only referenced in At the Mountains of Madness but also in Call of Cthulhu. <u>The Call of Cthulhu</u> is H.P. Lovecraft’s most famous work because it is subjectively the most intense and intricate story. It dives into the true power of the Great Cthulhu and how being exposed to even a simple drawing of the being can drive a man to complete madness. In the story, tales are explained of men who became mentally ill after being exposed to the terrifying grip of Cthulhu’s psyche, the tale of a man investigating the cult of Cthulhu, which aims to free the god from his dream-state under the ocean in the sunken city of R’lyeh, and the tale of a man of whose crew accidentally freed Cthulhu and brought upon their own demise. In the last section of the Call of Cthulhu, a man was driven to madness and death by the mere sight of Cthulhu in the flesh. H.P. Lovecraft created Cthulhu as a way to show how the human brain is physically incapable of comprehending the true power and horror beyond our world, shadowed in the darkness of the unknown, and the danger in shining a light into that darkness.
+            </p>
+        </div>
+        <img id="hp" src="Imgs/HP_Face.jpeg"></img>
+        <div id="final_remarks">
+            <p>The connections between the stories and the expansiveness of his mythos are testaments to the power that Lovecraft’s mind possessed. He built an entire universe based on his dreams, and connected them through seemingly unrelated tales. Yet, his powerful mind was a curse that plagued him with nightmarish horrors. He accumulated a great number of phobias, yet being afraid of “race-mixing” was more a result of the time period instead of the nightmares. As he aged, his mental psyche deteriorated until he died of small intestinal cancer at the age of 46. Even since his passing, his mythos has created a community of dedicated writers that add their own Lovecraftian tales. Even board and video games have been created in honor of the Cthulhu mythos. H.P. Lovecraft’s collection has brought entertainment and fear through many avenues to almost all people. 
+            </p>
+        </div>
+        <div id="finalQuote"><p>“The world is indeed comic, but the joke is on mankind.” - H.P. Lovecraft</p></div>
+        <div id="storyList">
+            <h2>-Story List-</h2>
+            <ul>
+                <li>The Tomb</li>
+                <li>Dagon</li>
+                <li>Beyond the Wall of Sleep</li>
+                <li>The Doom That Came to Sarnath</li>
+                <li>The Statement of Randolph Carter</li>
+                <li>Celepha&#239s</li>
+                <li>Nyarlathotep</li>
+                <li>Azathoth</li>
+                <li>Hypnos</li>
+                <li>The Lurking Fear</li>
+                <li>The Rats in the Walls</li>
+                <li>The Call of Cthulhu</li>
+                <li>The Dream-Quest of Unknown Kadath</li>
+                <li>The Colour Out of Space</li>
+                <li>The Dunwich Horror</li>
+                <li>At the Mountains of Madness</li>
+                <li>The Shadow Over Innsmouth</li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div id="credit" style="text-align: center; background-color: #333333;">
+        <h2>Credit: Morgan Stratton & Ben Breithaupt</h2>
+    </div>
+</body>
+</html>
