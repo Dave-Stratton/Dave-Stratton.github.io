@@ -17,6 +17,8 @@
             display: inline;
             margin: 0 auto;
             text-align: center;
+            color: white;
+            font-weight: bold;
         }
         nav li {
             display: inline;
@@ -36,15 +38,76 @@
             background-color: rgb(197, 25, 25);
             border: 3px solid rgb(197, 25, 25);
         }
+        nav h2#Portfolio {
+            color:rgb(18, 157, 161);
+            background: linear-gradient(90deg, rgb(148, 148, 148), burlywood, rgb(148, 148, 148));
+            overflow: hidden;
+            text-decoration: double dashed black 3px;
+        }
+        #secondBody {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            background-color: rgb(148,148,148);
+        }
+        .box {
+            position: relative;
+            width: 570px;
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(0,0,0,0.5);
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        .box::before {
+            content: '';
+            position: absolute;
+            width: 110%;
+            height: 100px;
+            background: linear-gradient(90deg, red, blue);
+            animation: animate 4s linear infinite;
+        }
+        .box::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            background: #0e1945;
+            border-radius: 16px;
+        }
+        @keyframes animate
+        {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .box h2 {
+            color: #ffffff;
+            font-size: 10vw;
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
     <h1>WELCOME TO MORGAN'S GITHUB REPOSITORY SITE</h1>
     <nav>
+        <h2>Projects:</h2>
         <ul>
             <a href="AP_HP.html"><li id="AP">AP Project</li></a>
             <a href="valentine.html"><li id="VDay">Valentine's Day</li></a>
         </ul>
+        <a href="Portfolio.html"><h2 id="Portfolio">Portfolio</h2></a>
     </nav>
+    <div id="secondBody">
+        <div class="box">
+            <h2>HOWDY</h2>
+        </div>
+    </div>
 </body>
 </html>
