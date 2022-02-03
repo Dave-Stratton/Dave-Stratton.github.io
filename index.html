@@ -33,20 +33,28 @@
             background-color: black;
             border: 3px solid rgb(0, 0, 0);
         }
+        #AP:hover {
+            animation: AP 2s ease-out forwards;
+        }
         #VDay {
             color: rgb(0, 0, 0);
             background-color: rgb(197, 25, 25);
             border: 3px solid rgb(197, 25, 25);
+        }
+        #VDay:hover {
+            animation: VDay 2s ease-out forwards;
         }
         nav h2#Portfolio {
             color:rgb(28, 131, 134);
             background-color: cyan;
             overflow: hidden;
             text-decoration: underline double black 3px;
-            box-shadow: 0 0 40px 15px cyan;
             max-width: fit-content;
             transform: translate(45vw, 10px);
             border-radius: 10px;
+        }
+        nav h2#Portfolio:hover {
+            animation: portfolio linear forwards 2s;
         }
         #secondBody {
             display: flex;
@@ -88,6 +96,25 @@
             }
             100% {
                 transform: rotate(360deg);
+            }
+        }
+        @keyframes portfolio {
+            to {
+                box-shadow: 0 0 40px 25px cyan;
+                font-size: 30px;
+                transform: translate(44vw);
+            }
+        }
+        @keyframes AP {
+            to {
+                box-shadow: 0 0 40px 25px black;
+                font-size: 25px;
+            }
+        }
+        @keyframes VDay {
+            to {
+                box-shadow: 0 0 40px 25px crimson;
+                font-size: 25px;
             }
         }
         .box h2 {
