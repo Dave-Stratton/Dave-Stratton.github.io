@@ -133,5 +133,10 @@ function animate() {
     renderer.render(scene, camera);
 }
 
+function Reveal() {
+    document.getElementById("contactInfo").style.visibility = "visible";
+    console.log("revealed");
+}
+
 init();
 animate();
