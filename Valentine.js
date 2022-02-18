@@ -1,9 +1,22 @@
-let scene, camera, renderer, box, heart;
+let scene, camera, renderer, box, heart, opposumBackground;
 let numBoxes = 0;
 let boxHolder = {};
 
 let deg = 0;
 let direction = 0;
+
+const opposumText1 = new THREE.TextureLoader().load('/Imgs/OpposumBackground.webp');
+const opposumText2 = new THREE.TextureLoader().load('/Imgs/Opossum2.png');
+const opposumText3 = new THREE.TextureLoader().load('/Imgs/Opossum3.jpeg');
+const opposumText4 = new THREE.TextureLoader().load('/Imgs/Opossum4.jpg');
+const opposumText5 = new THREE.TextureLoader().load('/Imgs/Opossum5.jpeg');
+const opposumText6 = new THREE.TextureLoader().load('/Imgs/Opossum6.jpg');
+const opposumText7 = new THREE.TextureLoader().load('/Imgs/Oppossum7.jpeg');
+const opposumText8 = new THREE.TextureLoader().load('/Imgs/Opossum8.jpeg');
+const opposumText9 = new THREE.TextureLoader().load('/Imgs/Opossum9.webp');
+const opposumText10 = new THREE.TextureLoader().load('/Imgs/Opossum10.jpeg');
+const opposumText11 = new THREE.TextureLoader().load('/Imgs/Opossum11.jpeg');
+
 
 function init() {
     scene = new THREE.Scene();
@@ -85,16 +98,51 @@ function animate() {
 }
 
 function createOppossum() {
-    const opossumBackground = new THREE.TextureLoader().load('/Imgs/OpposumBackground.webp');
+    let rand = Math.floor(Math.random() * 10);
+    console.log(rand);
+    if (rand == 0) {
+        opposumBackground = opposumText1;
+    }
+    else if (rand == 1) {
+        opposumBackground = opposumText2;
+    }
+    else if (rand == 2) {
+        opposumBackground = opposumText3;
+    }
+    else if (rand == 3) {
+        opposumBackground = opposumText4;
+    }
+    else if (rand == 4) {
+        opposumBackground = opposumText5;
+    }
+    else if (rand == 5) {
+        opposumBackground = opposumText6;
+    }
+    else if (rand == 6) {
+        opposumBackground = opposumText7;
+    }
+    else if (rand == 7) {
+        opposumBackground = opposumText8;
+    }
+    else if (rand == 8) {
+        opposumBackground = opposumText9;
+    }
+    else if (rand == 9) {
+        opposumBackground = opposumText10;
+    }
+    else if (rand == 10) {
+        opposumBackground = opposumText11;
+    }
+    console.log(opposumBackground);
     const boxGeo = new THREE.BoxGeometry(2, 2, 2);
-    const boxMaterial = new THREE.MeshStandardMaterial({color:0xffffff, map:opossumBackground});
+    const boxMaterial = new THREE.MeshStandardMaterial({color:0xffffff, map:opposumBackground});
     for (var i = numBoxes; i < numBoxes + 2; i++) {
         boxHolder[`box${i}`] = new THREE.Mesh(boxGeo, boxMaterial);
-        console.log(boxHolder[`box${i}`]);
+        //console.log(boxHolder[`box${i}`]);
     }
     for (var j = Object.keys(boxHolder).length - 1; j > 0; j--) {
         if (j % 2 == 0) { 
-            console.log(boxHolder[`box${j}`]);
+            //console.log(boxHolder[`box${j}`]);
             let xVal = Math.floor(Math.random() * 4);
             let zVal = Math.floor(Math.random() * 2);
             boxHolder[`box${j}`].position.set(xVal, 0, zVal);
@@ -109,6 +157,14 @@ function createOppossum() {
     }
     numBoxes = numBoxes + 2;
     
+}
+
+function clearPossums() {
+    for (var i = Object.keys(boxHolder).length -1; i > 0; i--) {
+        scene.remove(boxHolder[`box${i}`]);
+    }
+    numBoxes = 0;
+    boxHolder = {};
 }
 
 init();
