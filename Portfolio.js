@@ -30,7 +30,7 @@ function init() {
     scene.add(sphere);
 
     const sunTexture = new THREE.TextureLoader().load('/Imgs/SunMap.jpeg');
-    const sunGeo = new THREE.SphereGeometry(3, 32, 16);
+    const sunGeo = new THREE.SphereGeometry(4.5, 32, 16);
     const sunMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: sunTexture});
     sun = new THREE.Mesh(sunGeo, sunMaterial);
     sun.position.set (0,0,0);
@@ -48,11 +48,11 @@ function init() {
     const mercuryGeo = new THREE.SphereGeometry(0.5, 32, 16);
     const mercuryMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map:mercuryTexture});
     mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
-    mercury.position.set(0,0,7);
+    mercury.position.set(0,0,11);
     scene.add(mercury);
 
-    pointLight = new THREE.PointLight(0xffffff, 2);
-    pointLight.position.set(0, 0, 5);
+    pointLight = new THREE.PointLight(0xffffff, 4);
+    pointLight.position.set(0, 0, 10);
     const lightHelper = new THREE.PointLightHelper(pointLight);
     scene.add(pointLight);
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -66,9 +66,9 @@ function init() {
         if (i == 1) {
             star = new THREE.Mesh(starGeo, starMaterial);
             starLight = new THREE.PointLight(0xffffff, 0.2);
-            let x = Math.floor(Math.random() * 20) + 25;
+            let x = Math.floor(Math.random() * 30) + 35;
             let y = Math.floor(Math.random() * 10);
-            let z = Math.floor(Math.random() * 20) + 25;
+            let z = Math.floor(Math.random() * 30) + 35;
             star.position.set(x, y, z);
             starLight.position.set(x,y,z);
             scene.add(star, starLight);
@@ -77,9 +77,9 @@ function init() {
         else if (i == 2) {
             star = new THREE.Mesh(starGeo, starMaterial);
             starLight = new THREE.PointLight(0xffffff, 0.2);
-            let x = Math.floor(Math.random() * -25) - 25;
+            let x = Math.floor(Math.random() * -35) - 35;
             let y = Math.floor(Math.random() * -5);
-            let z = Math.floor(Math.random() * 25) + 25;
+            let z = Math.floor(Math.random() * 35) + 35;
             star.position.set(x, y, z);
             starLight.position.set(x,y,z);
             scene.add(star, starLight);
@@ -88,9 +88,9 @@ function init() {
         else if (i == 3) {
             star = new THREE.Mesh(starGeo, starMaterial);
             starLight = new THREE.PointLight(0xffffff, 0.2);
-            let x = Math.floor(Math.random() * -25) - 25;
+            let x = Math.floor(Math.random() * -35) - 35;
             let y = Math.floor(Math.random() * 5);
-            let z = Math.floor(Math.random() * -25) - 25;
+            let z = Math.floor(Math.random() * -35) - 35;
             star.position.set(x, y, z);
             starLight.position.set(x,y,z);
             scene.add(star, starLight);
@@ -99,9 +99,9 @@ function init() {
         else if (i == 4) {
             star = new THREE.Mesh(starGeo, starMaterial);
             starLight = new THREE.PointLight(0xffffff, 0.2);
-            let x = Math.floor(Math.random() * 25) + 25;
+            let x = Math.floor(Math.random() * 35) + 35;
             let y = Math.floor(Math.random() * -5);
-            let z = Math.floor(Math.random() * -25) - 25;
+            let z = Math.floor(Math.random() * -35) - 35;
             star.position.set(x, y, z);
             starLight.position.set(x,y,z);
             scene.add(star, starLight);
@@ -118,12 +118,12 @@ function animate() {
     sphere.position.z = 30 * Math.sin(deg);
     camera.position.x = 33 * Math.cos(deg-0.1);
     camera.position.z = 33 * Math.sin(deg-0.1);
-    pointLight.position.x = 5 * Math.cos(deg-0.1);
-    pointLight.position.z = 5 * Math.sin(deg-0.1);
+    pointLight.position.x = 10 * Math.cos(deg-0.1);
+    pointLight.position.z = 10 * Math.sin(deg-0.1);
     venus.position.x = 17 * Math.cos(Vdeg);
     venus.position.z = 17 * Math.sin(Vdeg);
-    mercury.position.x = 7 * Math.cos(Mdeg);
-    mercury.position.z = 7 * Math.sin(Mdeg);
+    mercury.position.x = 11 * Math.cos(Mdeg);
+    mercury.position.z = 11 * Math.sin(Mdeg);
     //sphere.rotation.z += 0.01;
 
     deg += 0.01;
