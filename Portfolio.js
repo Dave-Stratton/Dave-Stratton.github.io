@@ -1,4 +1,4 @@
-let scene, camera, renderer, sphere, pointLight, sun, sunLight, star, starLight, venus, mercury;
+let scene, camera, renderer, sphere, pointLight, sun, sunLight, star, starLight, venus, mercury, moon;
 
 let deg = 0;
 let Vdeg = 0;
@@ -50,6 +50,13 @@ function init() {
     mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
     mercury.position.set(0,0,11);
     scene.add(mercury);
+
+    const moonTexture = new THREE.TextureLoader().load('/Imgs/MoonTexture.jpeg');
+    const moonGeo = new THREE.SphereGeometry(0.5, 31, 16);
+    const moonMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: moonTexture});
+    moon = new THREE.Mesh(moonGeo, moonMaterial);
+    moon.position.set(0,0,0);
+    scene.add(moon);
 
     pointLight = new THREE.PointLight(0xffffff, 4);
     pointLight.position.set(0, 0, 10);
@@ -118,6 +125,9 @@ function animate() {
     sphere.position.z = 30 * Math.sin(deg);
     camera.position.x = 33 * Math.cos(deg-0.1);
     camera.position.z = 33 * Math.sin(deg-0.1);
+    moon.position.x = sphere.position.x + 5*Math.cos(2.5*deg);
+    moon.position.z = sphere.position.z + 5*Math.sin(2.5*deg);
+    moon.position.y = 1.3*Math.cos(deg);
     pointLight.position.x = 10 * Math.cos(deg-0.1);
     pointLight.position.z = 10 * Math.sin(deg-0.1);
     venus.position.x = 17 * Math.cos(Vdeg);
@@ -127,10 +137,11 @@ function animate() {
     //sphere.rotation.z += 0.01;
 
     deg += 0.01;
-    Vdeg += 0.014;
-    Mdeg += 0.04;
+    Vdeg += 0.012;
+    Mdeg += 0.02;
     camera.lookAt(sphere.position.x,0,sphere.position.z);
     renderer.render(scene, camera);
+    //console.log("Sphere X: " + sphere.position.x, "Sphere Z: " + sphere.position.z, "Moon X: " + moon.position.x, "Moon Z: " + moon.position.z);
 }
 
 function Reveal() {
