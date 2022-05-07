@@ -127,7 +127,7 @@ function animate() {
     camera.position.z = 33 * Math.sin(deg-0.1);
     moon.position.x = sphere.position.x + 5*Math.cos(2.5*deg);
     moon.position.z = sphere.position.z + 5*Math.sin(2.5*deg);
-    moon.position.y = 1.3*Math.cos(deg);
+    moon.position.y = 1.3*Math.sin(deg);
     pointLight.position.x = 10 * Math.cos(deg-0.1);
     pointLight.position.z = 10 * Math.sin(deg-0.1);
     venus.position.x = 17 * Math.cos(Vdeg);
