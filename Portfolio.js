@@ -70,51 +70,36 @@ function init() {
 
     const starGeo = new THREE.SphereGeometry(1,32,16);
     const starMaterial = new THREE.MeshStandardMaterial({color: 0xfff987});
-    for (let i = 1; i < 33; i++) {
-        if (i <= 8) {
-            star = new THREE.Mesh(starGeo, starMaterial);
-            starLight = new THREE.PointLight(0xffffff, 0.05);
-            let x = Math.floor(Math.random() * 30) + 40;
-            let y = Math.floor(Math.random() * 10);
-            let z = Math.floor(Math.random() * 30) + 40;
-            star.position.set(x, y, z);
-            starLight.position.set(x,y,z);
-            scene.add(star, starLight);
-            console.log(star.position);
+    for (let i = 1; i <= 80; i++) {
+        star = new THREE.Mesh(starGeo, starMaterial);
+        let x =  Math.floor(200 * Math.sin(Math.random() * 10));
+        if (x < 0) {
+            x -= 40;
         }
-        else if (i <= 16) {
-            star = new THREE.Mesh(starGeo, starMaterial);
-            starLight = new THREE.PointLight(0xffffff, 0.05);
-            let x = Math.floor(Math.random() * -35) - 40;
-            let y = Math.floor(Math.random() * -5);
-            let z = Math.floor(Math.random() * 35) + 40;
-            star.position.set(x, y, z);
-            starLight.position.set(x,y,z);
-            scene.add(star, starLight);
-            console.log(star.position);
+        else {
+            x += 40;
         }
-        else if (i <= 24) {
-            star = new THREE.Mesh(starGeo, starMaterial);
-            starLight = new THREE.PointLight(0xffffff, 0.05);
-            let x = Math.floor(Math.random() * -35) - 40;
-            let y = Math.floor(Math.random() * 5);
-            let z = Math.floor(Math.random() * -35) - 40;
-            star.position.set(x, y, z);
-            starLight.position.set(x,y,z);
-            scene.add(star, starLight);
-            console.log(star.position);
+        let y = Math.sin(Math.floor(Math.random() * 10));
+        if (y < 0) {
+            y = Math.floor(50 * y);
         }
-        else if (i < 33) {
-            star = new THREE.Mesh(starGeo, starMaterial);
-            starLight = new THREE.PointLight(0xffffff, 0.05);
-            let x = Math.floor(Math.random() * 35) + 40;
-            let y = Math.floor(Math.random() * -5);
-            let z = Math.floor(Math.random() * -35) - 40;
-            star.position.set(x, y, z);
-            starLight.position.set(x,y,z);
-            scene.add(star, starLight);
-            console.log(star.position);
+        else {
+            y = Math.floor(4 * y);
         }
+        let z = Math.floor(200 * Math.sin(Math.random() * 10));
+        if (z < 0) {
+            z -= 40;
+        }
+        else {
+            z += 40
+        }
+        star.position.set(x, y, z);
+        if (i % 4) {
+           starLight = new THREE.PointLight(0xffffff, 0.03);
+           starLight.position.set(x,y,z);
+        }
+        scene.add(star, starLight);
+        console.log(star.position);
     }
  
 }
