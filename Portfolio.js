@@ -3,6 +3,9 @@ let scene, camera, renderer, sphere, pointLight, sun, sunLight, star, starLight,
 let deg = 0;
 let Vdeg = 0;
 let Mdeg = 0;
+let Ydeg = 0;
+let radius = 40;
+let state = "earth";
 
 function init() {
     scene = new THREE.Scene();
@@ -16,7 +19,7 @@ function init() {
 
     document.body.appendChild(renderer.domElement);
 
-    camera.position.set(0,3,34);
+    camera.position.set(0,2,33);
     camera.lookAt(0,0,0);
 
     renderer.render(scene, camera);
@@ -27,10 +30,10 @@ function init() {
     sphere = new THREE.Mesh(sphereGeo, sphereMaterial);
     sphere.position.set(0,0,0);
     sphere.roughness = 1;
-    sphere.metalness = 0;
+    sphere.metalness = 1;
     scene.add(sphere);
 
-    const sunTexture = new THREE.TextureLoader().load('/Imgs/SunMap.jpeg');
+    const sunTexture = new THREE.TextureLoader().load('/Imgs/Sun2Map.jpeg');
     const sunGeo = new THREE.SphereGeometry(4.5, 32, 16);
     const sunMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: sunTexture});
     sun = new THREE.Mesh(sunGeo, sunMaterial);
@@ -47,7 +50,7 @@ function init() {
 
     const mercuryTexture = new THREE.TextureLoader().load('/Imgs/MercuryMap.png');
     const mercuryGeo = new THREE.SphereGeometry(0.5, 32, 16);
-    const mercuryMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map:mercuryTexture});
+    const mercuryMaterial = new THREE.MeshStandardMaterial({color: 0xfffffff, map:mercuryTexture});
     mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
     mercury.position.set(0,0,11);
     scene.add(mercury);
@@ -59,40 +62,65 @@ function init() {
     moon.position.set(0,0,0);
     scene.add(moon);
 
-    pointLight = new THREE.PointLight(0xffffff, 4);
-    pointLight.position.set(0, 0, 10);
+    pointLight = new THREE.PointLight(0xffffff, 3);
+    pointLight.position.set(0, 0, 0);
     const lightHelper = new THREE.PointLightHelper(pointLight);
-    scene.add(pointLight);
+    //scene.add(pointLight);
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
     const gridHelper = new THREE.GridHelper(100, 10);
     //scene.add(gridHelper);
 
+    sunLight1 = new THREE.PointLight(0xffffff, 0.5);
+    sunLight1.position.set(0,10,0);
+    scene.add(sunLight1);
+    sunLight2 = new THREE.PointLight(0xffffff, 0.5);
+    sunLight2.position.set(10,0,0);
+    scene.add(sunLight2);
+    sunLight3 = new THREE.PointLight(0xffffff, 0.5);
+    sunLight3.position.set(-10,0,0);
+    scene.add(sunLight3);
+    sunLight4 = new THREE.PointLight(0xffffff, 0.5);
+    sunLight4.position.set(0,0,10);
+    scene.add(sunLight4);
+    sunLight5 = new THREE.PointLight(0xffffff, 0.5);
+    sunLight5.position.set(0,0,-10);
+    scene.add(sunLight5);
+    sunLight6 = new THREE.PointLight(0xffffff, 0.5);
+    sunLight6.position.set(0,-10,0);
+    scene.add(sunLight6);
+
+
+    /*const testGeo = new THREE.SphereGeometry(1, 31, 16);
+    const testMaterial = new THREE.MeshStandardMaterial({color: 0xff0000});
+    testSphere = new THREE.Mesh(testGeo, testMaterial);
+    testSphere.position.set(0,3,33);
+    scene.add(testSphere);*/
+
     const starGeo = new THREE.SphereGeometry(1,32,16);
     const starMaterial = new THREE.MeshStandardMaterial({color: 0xfff987});
-    for (let i = 1; i <= 80; i++) {
+    for (let i = 1; i <= 100; i++) {
         star = new THREE.Mesh(starGeo, starMaterial);
-        let x =  Math.floor(200 * Math.sin(Math.random() * 10));
-        if (x < 0) {
-            x -= 40;
+        let randX = 75 * Math.cos(Math.random() * Math.PI);
+        let randY = Math.random();
+        let x, z;
+        if (randX >= 0 && randY > 0.5) {
+            x = randX + (Math.random() * 200);
+            z = Math.sqrt((75**2) - (randX**2)) + (Math.random() * 200);
         }
-        else {
-            x += 40;
+        else if (randX >= 0 && randY <= 0.5) {
+            x = randX + (Math.random() * 200);
+            z = -1 * Math.sqrt((75**2) - (randX**2)) - (Math.random() * 200);
         }
-        let y = Math.sin(Math.floor(Math.random() * 10));
-        if (y < 0) {
-            y = Math.floor(50 * y);
+        else if (randX < 0 && randY > 0.5) {
+            x = randX - (Math.random() * 200);
+            z = Math.sqrt((75**2) - (randX**2)) + (Math.random() * 200);
         }
-        else {
-            y = Math.floor(4 * y);
+        else if (randX < 0 && randY ) {
+            x = randX - (Math.random() * 200);
+            z = -1 * Math.sqrt((75**2) - (randX**2)) - (Math.random() * 200);
         }
-        let z = Math.floor(200 * Math.sin(Math.random() * 10));
-        if (z < 0) {
-            z -= 40;
-        }
-        else {
-            z += 40
-        }
+        let y = Math.floor(30 * Math.sin(Math.random() * 2 * Math.PI));
         star.position.set(x, y, z);
         if (i % 4) {
            starLight = new THREE.PointLight(0xffffff, 0.03);
@@ -104,35 +132,158 @@ function init() {
  
 }
 
+function overRuleViewPoint() {
+    let earthCheck = document.getElementById("checkEarth").checked;
+    let venusCheck = document.getElementById("checkVenus").checked;
+    let mercuryCheck = document.getElementById("checkMercury").checked;
+    if (state == "earth" && venusCheck == true) {
+        document.getElementById("checkEarth").checked = false;
+        state = "venus";
+    }
+    else if (state == "earth" && mercuryCheck == true) {
+        document.getElementById("checkEarth").checked = false;
+        state = "mercury";
+    }
+    else if (state == "venus" && earthCheck == true) {
+        document.getElementById("checkVenus").checked = false;
+        state = "earth";
+    }
+    else if (state == "venus" && mercuryCheck == true) {
+        document.getElementById("checkVenus").checked = false;
+        state = "mercury";
+    }
+    else if (state = "mercury" && earthCheck == true) {
+        document.getElementById("checkMercury").checked = false;
+        state = "earth";
+    }
+    else if (state = "mercury" && venusCheck == true) {
+        document.getElementById("checkMercury").checked = false;
+        state = "venus";
+    }
+    if (state == "earth") {
+        document.getElementById("checkEarth").checked = true;
+    }
+    else if (state == "venus") {
+        document.getElementById("checkVenus").checked = true;
+    }
+    else if (state == "mercury") {
+        document.getElementById("checkMercury").checked = true;
+    }
+    console.log(state);
+}
+
 function animate() {
     requestAnimationFrame(animate);
+    swayDeg = document.getElementById("slider").value;
+    Ydeg = document.getElementById("sliderY").value;
+    let simCheck = document.getElementById("sim").checked;
     sphere.rotation.y += 0.01;
     sphere.position.x = 30 * Math.cos(deg);
     sphere.position.z = 30 * Math.sin(deg);
-    camera.position.x = 33 * Math.cos(deg-0.1);
-    camera.position.z = 33 * Math.sin(deg-0.1);
-    moon.position.x = sphere.position.x + 5*Math.cos(2.5*deg);
-    moon.position.z = sphere.position.z + 5*Math.sin(2.5*deg);
+    if (simCheck == true) {
+        overRuleViewPoint();
+        document.getElementById("slider").style.visibility = "visible";
+        document.getElementById("earthDiv").style.visibility = "visible";
+        document.getElementById("venusDiv").style.visibility = "visible";
+        document.getElementById("mercuryDiv").style.visibility = "visible";
+        document.getElementById("simSwitch").innerHTML = "ON";
+        if (document.getElementById("checkEarth").checked == true) {
+            document.getElementById("sliderY").style.visibility = "hidden";
+            document.getElementById("zoomIn").style.visibility = "hidden";
+            document.getElementById("zoomOut").style.visibility = "hidden";
+            camera.position.x = sphere.position.x + (4.5*Math.cos(deg + parseFloat(swayDeg)));
+            camera.position.z = sphere.position.z + (4.5*Math.sin(deg + parseFloat(swayDeg)));
+            camera.position.y = 2;
+            camera.lookAt(sphere.position.x,0,sphere.position.z);
+        }
+        else if (document.getElementById("checkVenus").checked == true) {
+            document.getElementById("sliderY").style.visibility = "hidden";
+            document.getElementById("zoomIn").style.visibility = "hidden";
+            document.getElementById("zoomOut").style.visibility = "hidden";
+            camera.position.x = venus.position.x + (5*Math.cos(Vdeg + parseFloat(swayDeg)));
+            camera.position.z = venus.position.z + (5*Math.sin(Vdeg + parseFloat(swayDeg)));
+            camera.position.y = 2;
+            camera.lookAt(venus.position.x, 0, venus.position.z);
+        }
+        else if (document.getElementById("checkMercury").checked == true) {
+            document.getElementById("sliderY").style.visibility = "hidden";
+            document.getElementById("zoomIn").style.visibility = "hidden";
+            document.getElementById("zoomOut").style.visibility = "hidden";
+            camera.position.x = mercury.position.x + (3*Math.cos(Mdeg + parseFloat(swayDeg)));
+            camera.position.z = mercury.position.z + (3*Math.sin(Mdeg + parseFloat(swayDeg)));
+            camera.position.y = 2;
+            camera.lookAt(mercury.position.x, 0, mercury.position.z);
+        }
+        else {
+            document.getElementById("sliderY").style.visibility = "visible";
+            document.getElementById("zoomIn").style.visibility = "visible";
+            document.getElementById("zoomOut").style.visibility = "visible";
+            camera.position.x = radius * Math.cos(parseFloat(swayDeg)) * Math.cos(parseFloat(Ydeg));
+            camera.position.z = radius * Math.sin(parseFloat(swayDeg)) * Math.cos(parseFloat(Ydeg));
+            camera.position.y = radius * Math.sin(parseFloat(Ydeg));
+            if (radius == 9) {
+                camera.lookAt(camera.position.x * 10, 0, camera.position.z * 10);
+            }
+            else {
+                camera.lookAt(0,0,0);
+            }
+        }
+    }
+    else {
+        camera.position.x = 33 * Math.cos(deg - 0.1);
+        camera.position.z = 33 * Math.sin(deg - 0.1);
+        camera.position.y = 2;
+        camera.lookAt(sphere.position.x, 0, sphere.position.z);
+        document.getElementById("slider").style.visibility = "hidden";
+        document.getElementById("sliderY").style.visibility = "hidden";
+        document.getElementById("zoomIn").style.visibility = "hidden";
+        document.getElementById("zoomOut").style.visibility = "hidden";
+        document.getElementById("earthDiv").style.visibility = "hidden";
+        document.getElementById("venusDiv").style.visibility = "hidden";
+        document.getElementById("mercuryDiv").style.visibility = "hidden";
+        document.getElementById("simSwitch").innerHTML = "OFF";
+    }
+    //testSphere.position.x = sphere.position.x + (3*Math.cos(deg + parseFloat(swayDeg)));
+    //testSphere.position.z = sphere.position.z + (3*Math.sin(deg + parseFloat(swayDeg)));
+    moon.position.x = sphere.position.x + 5*Math.cos(2 * deg);
+    moon.position.z = sphere.position.z + 5*Math.sin(2 * deg);
     moon.position.y = 1.3*Math.sin(deg);
-    pointLight.position.x = 10 * Math.cos(deg-0.1);
-    pointLight.position.z = 10 * Math.sin(deg-0.1);
+    //pointLight.position.x = 10 * Math.cos(deg-0.1);
+    //pointLight.position.z = 10 * Math.sin(deg-0.1);
     venus.position.x = 17 * Math.cos(Vdeg);
     venus.position.z = 17 * Math.sin(Vdeg);
     mercury.position.x = 11 * Math.cos(Mdeg);
     mercury.position.z = 11 * Math.sin(Mdeg);
+    mercury.rotation.y -= 0.02;
     //sphere.rotation.z += 0.01;
 
-    deg += 0.01;
+    if(deg < Math.PI * 2) {
+        deg += 0.01;
+    }
+    else if (deg >= Math.PI * 2) {
+        deg = 0;
+    }
     Vdeg += 0.012;
     Mdeg += 0.02;
-    camera.lookAt(sphere.position.x,0,sphere.position.z);
+    //camera.lookAt(0,0,0);
     renderer.render(scene, camera);
     //console.log("Sphere X: " + sphere.position.x, "Sphere Z: " + sphere.position.z, "Moon X: " + moon.position.x, "Moon Z: " + moon.position.z);
+    //console.log("value:" + swayDeg + "X:" + testSphere.position.x, "Z:" + testSphere.position.z);
+    //console.log(parseFloat(swayDeg));
 }
+
+
 
 function Reveal() {
     document.getElementById("contactInfo").style.visibility = "visible";
     console.log("revealed");
+}
+
+function ZoomIn() {
+    radius = 9;
+}
+function ZoomOut() {
+    radius = 40;
 }
 
 init();

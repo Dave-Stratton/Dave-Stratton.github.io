@@ -11,6 +11,7 @@
         }
         body {
             margin: 0;
+            background-color: black;
         }
         #text {
             color: white;
@@ -23,27 +24,191 @@
             color: whitesmoke;
             border-width: 10px;
             border-color:rgb(145, 17, 17);
+            border-style: outset;
         }
         #contact h4 {
             visibility: hidden;
         }
+        #xSlide {
+            width: 80vw;
+            position: absolute;
+            top: 90vh;
+            left: 10vw;
+            
+        }
+        #slider {
+            appearance: none;
+            width: 100%;
+            height: 20px;
+            transform: rotate(180deg);
+            background: linear-gradient(90deg, gray, #1e66a5, gray);
+            border-radius: 50px;
+        }
+        #slider::-webkit-slider-thumb {
+            appearance: none;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background: radial-gradient(#1e66a5, rgb(90, 90, 90));
+        }
+        #sliderY {
+            position: absolute;
+            height: 20px;
+            width: 80vh;
+            left: 75vw;
+            top: 50vh;
+            appearance: none;
+            margin: 0;
+            transform: rotate(270deg);
+            background: linear-gradient(90deg, gray, #ac2224, gray);
+            border-radius: 50px;
+        }
+        #sliderY::-webkit-slider-thumb {
+            appearance: none;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background: radial-gradient(#ac2224, rgb(90, 90, 90));
+        }
+        button {
+            width: 45px;
+            height: 40px;
+            background-color: rgb(91, 224, 224);
+            border: outset white 5px;
+        }
+        #zoomIn img {
+            width: 20px;
+            height: auto;
+        }
+        #zoomOut img {
+            width: 20px;
+            height: auto;
+        }
+        .container {
+            display: block;
+            position: relative;
+            font-size: 20px;
+            margin: 10px;
+        }
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .checkmark {
+            position: absolute;
+            margin-left: 10px;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            background-color: #2d015d;
+            border: solid white;
+        }
+        .container input:checked ~ .checkmark {
+            background-color: rgb(91, 224, 224);
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        #simSwitch {
+            border-radius: 0%;
+            width: 37px;
+            text-align: center;
+        }
+        .container #simSwitch::after {
+            display: none;
+        }
+        
+        #Sim {
+            position: absolute;
+            top: 0;
+            left: 90vw;
+        }
+        #specific_text {
+            position: absolute;
+            top: 110vh;
+            background: linear-gradient(black, rgb(110, 110, 110));
+            width: 100vw;
+        }
+       
     </style>
 </head>
 <body>
     <div id="text">
-        <h1>Welcome to my THREEJS webpage!</h1>
+        <h1>Welcome to my portfolio webpage!</h1>
         <p>Hello, my name is Morgan Stratton.</p>
         <p>I am a high school Senior planning on attending a four year</p>
-        <p>university, majoring in Mechanical and or Biomedical Engineering.</p>
+        <p>university, majoring in Mechanical Engineering.</p>
         <p>I taught myself how to program in Python, HTML5, CSS, Javascript</p>
         <p>and C++ for Arduino. I also am knowledgable in basic C# as well as standard C++.</p>
+        <p>I am also a Cross Country and Track captain at Waterloo High School.</p>
         <br>
         
         <div id="contact">
             <button  id="revealButton" onclick="Reveal()">CONTACT</button>
             <h4 id="contactInfo">Contact @ mlstratton11@gmail.com</h4>
         </div>
+        <label class="container" id="earthDiv">Earth:  
+            <input type="checkbox" id="checkEarth" name="earth" checked="checked">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container" id="venusDiv">Venus:  
+            <input type="checkbox" id="checkVenus" name="venus">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container" id="mercuryDiv">Mercury:  
+            <input type="checkbox" id="checkMercury" name="mercury">
+            <span class="checkmark"></span>
+        </label>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button id="zoomIn" onclick="ZoomIn()"><img src="/Imgs/zoomIn.png"></button>
+        <button id="zoomOut" onclick="ZoomOut()"><img src="/Imgs/zoomOut.png"></button>
+        <div id="xSlide">
+            <input type="range" id="slider" min="-3.14" max="3.14" step="0.01" value="-1">
+        </div>
+            <input type="range" id="sliderY" min="-1.57" max="1.57" step="0.01">
+        <label class="container" id="Sim">SIM:
+            <input type="checkbox" id="sim" name="sim">
+            <span class="checkmark" id="simSwitch"></span>
+        </label>
+        <div id="specific_text">
+            <h2>Running:</h2>
+            <p>I've been on varsity all 4 years of Cross Country and will have been in Track varsity as well, this coming season.</p>
+            <h3>PRs</h3>
+            <li>3 mile: 16:30</li>
+            <li>1600m: 4:48</li>
+            <li>800m: 2:06</li>
+            <li>400m: 53s</li>
+            <br>
+            <h2>Band:</h2>
+            <p>My primary instrument is the trumpet.</p>
+            <p>Over my high school career, I've been in the Marching Band for 4 years, Jazz Band for 4 years, Wind Ensemble for 2 years, and Pep/Concert Band for 4 years.</p>
+            <p>Senior year, I was chosen as High Brass Section Leader, which has put me into a leadership role within the band.</p>
+            <p>Favorite Marching Show: "Through the Lens" (2022).</p>
+        </div>
     </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
     <script src="Portfolio.js"></script>
 </body>

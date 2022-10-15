@@ -7,7 +7,7 @@
     <title>Navigation</title>
     <style>
         body {
-            background-color: rgb(148, 148, 148);
+            background: rgb(148, 148, 148);
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         body h1 {
@@ -45,32 +45,34 @@
             animation: VDay 2s ease-out forwards;
         }
         nav h2#Portfolio {
-            color:rgb(28, 131, 134);
+            color:rgb(33, 33, 33);
             background-color: cyan;
             overflow: hidden;
-            text-decoration: underline double black 3px;
             max-width: fit-content;
             transform: translate(45vw, 10px);
-            border-radius: 10px;
+            border-radius: 5px;
         }
         nav h2#Portfolio:hover {
             animation: portfolio linear forwards 2s;
         }
         #secondBody {
+            position: absolute;
+            left: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
             min-height: 70vh;
-            background-color: rgb(148,148,148);
+            background: linear-gradient(rgb(148,148,148), rgb(72, 72, 72));
         }
         .box {
             position: relative;
-            width: 570px;
-            height: 220px;
+            width: 580px;
+            height: 230px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgb(0,0,0,0.5);
+            background: rgb(0,0,0,0.7);
             overflow: hidden;
             border-radius: 20px;
         }
@@ -85,7 +87,7 @@
         .box::after {
             content: '';
             position: absolute;
-            inset: 4px;
+            inset: 8px;
             background: #0e1945;
             border-radius: 16px;
         }
@@ -119,7 +121,7 @@
         }
         .box h2 {
             color: #ffffff;
-            font-size: 10vw;
+            font-size: 120px;
             position: relative;
             z-index: 10;
         }
