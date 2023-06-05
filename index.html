@@ -56,11 +56,20 @@
             overflow: hidden;
             max-width: fit-content;
             transform: translate(45vw, 10px);
-            border: 2px solid cyan;
+            border: 3px solid cyan;
             border-radius: 5px;
         }
         nav p#Portfolio:hover {
             animation: portfolio linear forwards 2s;
+        }
+        #Graph {
+            color: rgb(252, 252, 126);
+            background-color: rgb(187, 30, 30);
+            border: 3px solid rgb(187, 30, 30);
+            border-radius: 5px;
+        }
+        #Graph:hover {
+            animation: Graph 2s linear forwards;
         }
         #secondBody {
             position: absolute;
@@ -120,6 +129,12 @@
                 font-size: 25px;
             }
         }
+        @keyframes Graph {
+            to {
+                box-shadow: 0 0 40px 25px rgb(149, 22, 22);
+                font-size: 25px;
+            }
+        }
         /*@keyframes VDay {
             to {
                 box-shadow: 0 0 40px 25px crimson;
@@ -141,6 +156,7 @@
         <div id="linkHolder">
             <a href="AP_HP.html"><p id="AP">AP Project</p></a>
             <a href="Portfolio.html"><p id="Portfolio">Portfolio</p></a>
+            <a href="3D.html"><p id="Graph">3D Graph</p></a>
         </div>
     </nav>
     <div id="secondBody">

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nerd Math Shit</title>
+    <link rel="stylesheet" href="3D.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js" type="text/javscript"></script>
+</head>
+<body id="body">
+    <button id="change" onclick="changeBG()">Dark Theme</button>
+    <div id="stuff">
+        <h1>Big 3D Graph</h1>
+        <label for="funct">Choose a type of Function: </label>
+        <select id="funct" name="funct">
+            <option value="null">None</option>
+            <!--<option value="lin">Linear</option>
+            <option value="quad">Quadratic</option>-->
+            <option value="poly">Polynomial</option>
+            <option value="sqrt">Square Root</option>
+            <option value="log">Natural Logarithm</option>
+        </select>
+        <br>
+        <div name="domain" id="domain">
+            <label>Left Bound:</label>
+            <input id="leftB" value="0">
+            <label>Right Bound:</label>
+            <input id="rightB" value="0">
+        </div>
+        <br>
+        <label for="slider">Y-Intercept: </label>
+        <input type="range" id="slider" name="slider" min="-20" max="20" step="0.5" value="0">
+        <p id="y_int">0</p>
+        <br>
+        <div id="funky"></div>
+        <div id="functionHolder">
+            <p id="function"></p>
+            <p id="vol"></p>
+        </div>
+    </div>
+    <div id="swipeZone"></div>
+    <!-- code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
+    <script src="3D.js"></script>
+</body>
+</html>
