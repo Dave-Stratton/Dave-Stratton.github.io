@@ -7,7 +7,8 @@
     <title>Navigation</title>
     <style>
         body {
-            background: rgb(148, 148, 148);
+            background: linear-gradient(rgb(148,148,148), rgb(72, 72, 72));
+            height: 100vh;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         body h1 {
@@ -20,7 +21,11 @@
             color: white;
             font-weight: bold;
         }
-        nav li {
+        #linkHolder {
+            text-align: center;
+            height: 30px;
+        }
+        nav p {
             display: inline;
             font-weight: bold;
             font-size: 20px;
@@ -32,27 +37,29 @@
             color: rgb(5, 151, 5);
             background-color: black;
             border: 3px solid rgb(0, 0, 0);
+            border-radius: 5px;
         }
         #AP:hover {
             animation: AP 2s ease-out forwards;
         }
-        #VDay {
+        /*#VDay {
             color: rgb(0, 0, 0);
             background-color: rgb(197, 25, 25);
             border: 3px solid rgb(197, 25, 25);
         }
         #VDay:hover {
             animation: VDay 2s ease-out forwards;
-        }
-        nav h2#Portfolio {
+        }*/
+        nav p#Portfolio {
             color:rgb(33, 33, 33);
             background-color: cyan;
             overflow: hidden;
             max-width: fit-content;
             transform: translate(45vw, 10px);
+            border: 2px solid cyan;
             border-radius: 5px;
         }
-        nav h2#Portfolio:hover {
+        nav p#Portfolio:hover {
             animation: portfolio linear forwards 2s;
         }
         #secondBody {
@@ -63,7 +70,7 @@
             align-items: center;
             width: 100%;
             min-height: 70vh;
-            background: linear-gradient(rgb(148,148,148), rgb(72, 72, 72));
+            /*background: linear-gradient(rgb(148,148,148), rgb(72, 72, 72));*/
         }
         .box {
             position: relative;
@@ -113,12 +120,12 @@
                 font-size: 25px;
             }
         }
-        @keyframes VDay {
+        /*@keyframes VDay {
             to {
                 box-shadow: 0 0 40px 25px crimson;
                 font-size: 25px;
             }
-        }
+        }*/
         .box h2 {
             color: #ffffff;
             font-size: 120px;
@@ -131,11 +138,10 @@
     <h1>WELCOME TO MORGAN'S GITHUB REPOSITORY SITE</h1>
     <nav>
         <h2>Projects:</h2>
-        <ul>
-            <a href="AP_HP.html"><li id="AP">AP Project</li></a>
-            <a href="valentine.html"><li id="VDay">Valentine's Day</li></a>
-        </ul>
-        <a href="Portfolio.html"><h2 id="Portfolio">Portfolio</h2></a>
+        <div id="linkHolder">
+            <a href="AP_HP.html"><p id="AP">AP Project</p></a>
+            <a href="Portfolio.html"><p id="Portfolio">Portfolio</p></a>
+        </div>
     </nav>
     <div id="secondBody">
         <div class="box">
