@@ -5,11 +5,67 @@ let Vdeg = 0;
 let Mdeg = 0;
 let Ydeg = 0;
 let radius = 40;
+let rad = 4.5;
+let swayDeg = -1;
+let pos_y = 2;
 let state = "earth";
+let k = 1;
+
+// movement stuff
+let startX;
+let startY;
+let mouseDown = 0;
+document.getElementById("swipeZone").addEventListener('mousedown', function (event) {
+    mouseDown++;
+    startX = event.pageX;
+    startY = event.pageY;
+});
+document.getElementById("swipeZone").addEventListener('mouseup', ()=>{
+    mouseDown--;
+});
+document.getElementById("swipeZone").addEventListener('mousemove', function (event) {
+    if (mouseDown > 0) {
+        if ((event.clientX - startX) > 0) {
+            swayDeg += 0.0005*Math.abs(event.clientX-startX);
+        }
+        else if ((event.clientX - startX) < 0) {
+            swayDeg -= 0.0005*Math.abs(event.clientX-startX);
+        }
+        if ((event.clientY - startY) > 0) {
+            pos_y += k*0.001*Math.abs(event.clientY-startY);
+        }
+        else if ((event.clientY - startY) < 0) {
+         pos_y -= k*0.001*Math.abs(event.clientY-startY);
+        }
+    }
+});
+
+let keyPressed = 0;
+
+window.onkeydown = keyCheckDown;
+
+function keyCheckDown() {
+    let e = window.event;
+    if (e.keyCode == '38') {
+        keyPressed = 38;
+    }
+    else if (e.keyCode == '40') {
+        keyPressed = 40;
+    }
+    document.body.classList.add("stop-scrolling");
+}
+
+window.onkeyup = keyCheckUp;
+
+function keyCheckUp() {
+    keyPressed = 0;
+    document.body.classList.remove("stop-scrolling");
+}
+
 
 function init() {
     scene = new THREE.Scene();
-    const background = new THREE.TextureLoader().load('/Imgs/SpaceBackground.jpeg');
+    const background = new THREE.TextureLoader().load('/Imgs/SpaceBackground2.png');
     scene.background = background;
 
     camera =  new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -97,9 +153,9 @@ function init() {
     testSphere.position.set(0,3,33);
     scene.add(testSphere);*/
 
-    const starGeo = new THREE.SphereGeometry(1,32,16);
+    const starGeo = new THREE.SphereGeometry(0.5,32,16);
     const starMaterial = new THREE.MeshStandardMaterial({color: 0xfff987});
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 120; i++) {
         star = new THREE.Mesh(starGeo, starMaterial);
         let randX = 75 * Math.cos(Math.random() * Math.PI);
         let randY = Math.random();
@@ -123,7 +179,7 @@ function init() {
         let y = Math.floor(30 * Math.sin(Math.random() * 2 * Math.PI));
         star.position.set(x, y, z);
         if (i % 4) {
-           starLight = new THREE.PointLight(0xffffff, 0.03);
+           starLight = new THREE.PointLight(0xffffff, 0.025);
            starLight.position.set(x,y,z);
         }
         scene.add(star, starLight);
@@ -174,74 +230,78 @@ function overRuleViewPoint() {
 
 function animate() {
     requestAnimationFrame(animate);
-    swayDeg = document.getElementById("slider").value;
-    Ydeg = document.getElementById("sliderY").value;
+    if (mouseDown > 1) {
+        mouseDown = 0;
+    }
+    if (mouseDown < 1) {
+        mouseDown = 0;
+    }
+    if (keyPressed == 38) {
+        rad -= 0.25;
+    }
+    else if(keyPressed == 40) {
+        rad += 0.25;
+    }
     let simCheck = document.getElementById("sim").checked;
     sphere.rotation.y += 0.01;
     sphere.position.x = 30 * Math.cos(deg);
     sphere.position.z = 30 * Math.sin(deg);
     if (simCheck == true) {
+        let preState = state;
         overRuleViewPoint();
-        document.getElementById("slider").style.visibility = "visible";
+        if (state != preState) {
+            pos_y = 2;
+            rad = 4.5;
+            swayDeg = -1;
+        }
         document.getElementById("earthDiv").style.visibility = "visible";
         document.getElementById("venusDiv").style.visibility = "visible";
         document.getElementById("mercuryDiv").style.visibility = "visible";
         document.getElementById("simSwitch").innerHTML = "ON";
+        document.getElementById("directions").style.visibility = "visible";
+        document.getElementById("about").style.visibility = "hidden";
         if (document.getElementById("checkEarth").checked == true) {
-            document.getElementById("sliderY").style.visibility = "hidden";
-            document.getElementById("zoomIn").style.visibility = "hidden";
-            document.getElementById("zoomOut").style.visibility = "hidden";
-            camera.position.x = sphere.position.x + (4.5*Math.cos(deg + parseFloat(swayDeg)));
-            camera.position.z = sphere.position.z + (4.5*Math.sin(deg + parseFloat(swayDeg)));
-            camera.position.y = 2;
+            let k = 1;
+            camera.position.x = sphere.position.x + (rad*Math.cos(deg + parseFloat(swayDeg)));
+            camera.position.z = sphere.position.z + (rad*Math.sin(deg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
             camera.lookAt(sphere.position.x,0,sphere.position.z);
         }
         else if (document.getElementById("checkVenus").checked == true) {
-            document.getElementById("sliderY").style.visibility = "hidden";
-            document.getElementById("zoomIn").style.visibility = "hidden";
-            document.getElementById("zoomOut").style.visibility = "hidden";
-            camera.position.x = venus.position.x + (5*Math.cos(Vdeg + parseFloat(swayDeg)));
-            camera.position.z = venus.position.z + (5*Math.sin(Vdeg + parseFloat(swayDeg)));
-            camera.position.y = 2;
+            let k =1;
+            camera.position.x = venus.position.x + (rad*Math.cos(Vdeg + parseFloat(swayDeg)));
+            camera.position.z = venus.position.z + (rad*Math.sin(Vdeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
             camera.lookAt(venus.position.x, 0, venus.position.z);
         }
         else if (document.getElementById("checkMercury").checked == true) {
-            document.getElementById("sliderY").style.visibility = "hidden";
-            document.getElementById("zoomIn").style.visibility = "hidden";
-            document.getElementById("zoomOut").style.visibility = "hidden";
-            camera.position.x = mercury.position.x + (3*Math.cos(Mdeg + parseFloat(swayDeg)));
-            camera.position.z = mercury.position.z + (3*Math.sin(Mdeg + parseFloat(swayDeg)));
-            camera.position.y = 2;
+            let k =1;
+            camera.position.x = mercury.position.x + (rad*Math.cos(Mdeg + parseFloat(swayDeg)));
+            camera.position.z = mercury.position.z + (rad*Math.sin(Mdeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
             camera.lookAt(mercury.position.x, 0, mercury.position.z);
         }
         else {
-            document.getElementById("sliderY").style.visibility = "visible";
-            document.getElementById("zoomIn").style.visibility = "visible";
-            document.getElementById("zoomOut").style.visibility = "visible";
-            camera.position.x = radius * Math.cos(parseFloat(swayDeg)) * Math.cos(parseFloat(Ydeg));
-            camera.position.z = radius * Math.sin(parseFloat(swayDeg)) * Math.cos(parseFloat(Ydeg));
-            camera.position.y = radius * Math.sin(parseFloat(Ydeg));
-            if (radius == 9) {
-                camera.lookAt(camera.position.x * 10, 0, camera.position.z * 10);
-            }
-            else {
-                camera.lookAt(0,0,0);
-            }
+            k = 2;
+            camera.position.x = (40+rad) * Math.cos(parseFloat(swayDeg));
+            camera.position.z = (40+rad) * Math.sin(parseFloat(swayDeg));
+            camera.position.y = pos_y;
+            camera.lookAt(0,0,0);
         }
     }
     else {
-        camera.position.x = 33 * Math.cos(deg - 0.1);
-        camera.position.z = 33 * Math.sin(deg - 0.1);
+        let k =1;
+        camera.position.x = 35 * Math.cos(deg - 0.1);
+        camera.position.z = 35 * Math.sin(deg - 0.1);
         camera.position.y = 2;
         camera.lookAt(sphere.position.x, 0, sphere.position.z);
-        document.getElementById("slider").style.visibility = "hidden";
-        document.getElementById("sliderY").style.visibility = "hidden";
-        document.getElementById("zoomIn").style.visibility = "hidden";
-        document.getElementById("zoomOut").style.visibility = "hidden";
         document.getElementById("earthDiv").style.visibility = "hidden";
         document.getElementById("venusDiv").style.visibility = "hidden";
         document.getElementById("mercuryDiv").style.visibility = "hidden";
         document.getElementById("simSwitch").innerHTML = "OFF";
+        document.getElementById("directions").style.visibility = "hidden";
+        document.getElementById("about").style.visibility = "visible";
+        rad = 5;
     }
     //testSphere.position.x = sphere.position.x + (3*Math.cos(deg + parseFloat(swayDeg)));
     //testSphere.position.z = sphere.position.z + (3*Math.sin(deg + parseFloat(swayDeg)));
@@ -277,13 +337,6 @@ function animate() {
 function Reveal() {
     document.getElementById("contactInfo").style.visibility = "visible";
     console.log("revealed");
-}
-
-function ZoomIn() {
-    radius = 9;
-}
-function ZoomOut() {
-    radius = 40;
 }
 
 init();

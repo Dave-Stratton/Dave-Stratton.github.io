@@ -186,7 +186,7 @@ document.getElementById("body").addEventListener("wheel", function (event) {
     else if (event.deltaY < 0) {
         rad -= 1;
     }
-})
+});
 
 // initialize ThreeJS
 

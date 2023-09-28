@@ -13,10 +13,69 @@
             margin: 0;
             background-color: black;
         }
+        nav {
+            position: absolute;
+            z-index: 100;
+            color: white;
+            background-color: rgb(185, 17, 17);
+            width: 100vw;
+            height: 40px;
+            font-size: 20pt;
+            display: block;
+        }
+        nav a{
+            color: rgb(236, 236, 236);
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            border: 4px black solid;
+            background-color: rgb(110, 110, 110);
+        }
+        nav p {
+            display: inline;
+            position: relative;
+            left: 35%;
+        }
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .content {
+            padding: 16px;
+        }
+        .sticky +.content {
+            padding-top: 60px;
+        }
+        .stop-scrolling {
+            height: 100%;
+            overflow: hidden;
+        }
+        #swipeZone {
+            position: absolute;
+            width: 80vw;
+            left: 20vw;
+            height: 100vh;
+        }
         #text {
             color: white;
             position: absolute;
+            top: 10px;
+            font-size: 16pt;
         }
+        #about {
+            font-style: bold;
+            padding-left: 15px;
+            text-shadow: 2px 2px 5px rgba(211, 211, 211, 0.932);
+       }
+       #about h1 {
+           text-shadow: 3px 3px 5px rgba(194, 194, 194, 0.753);
+       }
+       #pg2 {
+           position: relative;
+            left: 60vw;
+            top: 250px;
+       }
         #revealButton {
             width: 150px;
             height: 50px;
@@ -26,63 +85,19 @@
             border-color:rgb(145, 17, 17);
             border-style: outset;
         }
-        #contact h4 {
-            visibility: hidden;
+        #revealButton:hover {
+            background-color: rgb(240, 6, 6);
+            border-color: rgb(177, 39, 39);
         }
-        #xSlide {
-            width: 80vw;
-            position: absolute;
-            top: 90vh;
-            left: 10vw;
-            
-        }
-        #slider {
-            appearance: none;
-            width: 100%;
-            height: 20px;
-            transform: rotate(180deg);
-            background: linear-gradient(90deg, gray, #1e66a5, gray);
-            border-radius: 50px;
-        }
-        #slider::-webkit-slider-thumb {
-            appearance: none;
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background: radial-gradient(#1e66a5, rgb(90, 90, 90));
-        }
-        #sliderY {
-            position: absolute;
-            height: 20px;
-            width: 80vh;
-            left: 75vw;
-            top: 50vh;
-            appearance: none;
-            margin: 0;
-            transform: rotate(270deg);
-            background: linear-gradient(90deg, gray, #ac2224, gray);
-            border-radius: 50px;
-        }
-        #sliderY::-webkit-slider-thumb {
-            appearance: none;
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background: radial-gradient(#ac2224, rgb(90, 90, 90));
+        #revealButton:active {
+            background-color: rgb(238, 111, 111);
+            border-color: rgb(211, 64, 64);
         }
         button {
             width: 45px;
             height: 40px;
             background-color: rgb(91, 224, 224);
             border: outset white 5px;
-        }
-        #zoomIn img {
-            width: 20px;
-            height: auto;
-        }
-        #zoomOut img {
-            width: 20px;
-            height: auto;
         }
         .container {
             display: block;
@@ -139,31 +154,60 @@
         
         #Sim {
             position: absolute;
-            top: 0;
+            top: 20px;
             left: 90vw;
         }
-        #specific_text {
+        #planetButtons label{
+            font-size: 20pt;
+        }
+        #directions {
+            visibility: hidden;
+        }
+        #projects {
             position: absolute;
             top: 110vh;
             background: linear-gradient(black, rgb(110, 110, 110));
             width: 100vw;
         }
+        #projects img{
+            max-width: 40vw;;
+            max-height: 60vh;
+        }
+        #projects video {
+            max-width: 50vw;;
+            max-height: 60vh;
+        }
        
     </style>
 </head>
 <body>
+    <div id="swipeZone"></div>
+    <nav id="navbar">
+        <a href="#text">About</a>
+        <a href="#projects">Projects</a>
+        <a href="academics">Academics</a>
+        <p>Contact: strattml@rose-hulman.edu or mlstratton11@gmail.com</p>
+    </nav>
     <div id="text">
-        <!--                   don't type longer than this line                             -->
-        <h1>Welcome to my portfolio webpage!</h1>
-        <p>Hello, my name is Morgan Stratton.</p>
-        <p>I'm a Mechanical Engineering student at Rose-Hulman Intstitute of Technology.</p>
-        <p></p>
-        <br>
-        
-        <div id="contact">
-            <button  id="revealButton" onclick="Reveal()">CONTACT</button>
-            <h4 id="contactInfo">Contact @ strattml@rose-hulman.edu</h4>
+        <div id="about"><!--                   don't type longer than this line            -->
+            <h1>Welcome to my portfolio webpage!</h1>
+            <p>Hello, my name is Morgan Stratton. I'm a Mechanical Engineering student</p>
+            <p>at Rose-Hulman Intstitute of Technology. I run Cross Country and Track</p>
+            <p>here at Rose, as well as being a member of the Human Powered Vehicle team </p>
+            <p>and American Society of Mechanical Engineers. I started teaching myself how</p>
+            <p>to code back during covid and made this website as a fun and challenging project.</p>
+            <br>
+            <br>
+            <div id="pg2">
+            <p>Since then I've continued to learn more about programming, but my attention </p>
+            <p>is now focused on engineering. I love designing systems, problem solving, and </p>
+            <p>figuring out how our world works and the little mechanism within it operate.</p>
+            <p>I'm currently looking for internship oppurtunities that will give me a chance</p>
+            <p>to expand my understanding of engineering and provide quality work to an</p>
+            <p>innovative company.</p>
+            </div>
         </div>
+        <div id="planetButtons">
         <label class="container" id="earthDiv">Earth:  
             <input type="checkbox" id="checkEarth" name="earth" checked="checked">
             <span class="checkmark"></span>
@@ -176,48 +220,51 @@
             <input type="checkbox" id="checkMercury" name="mercury">
             <span class="checkmark"></span>
         </label>
-        <br>
-        <br>
-        <br>
-        <br>
-        <button id="zoomIn" onclick="ZoomIn()"><img src="/Imgs/zoomIn.png"></button>
-        <button id="zoomOut" onclick="ZoomOut()"><img src="/Imgs/zoomOut.png"></button>
-        <div id="xSlide">
-            <input type="range" id="slider" min="-3.14" max="3.14" step="0.01" value="-1">
         </div>
-            <input type="range" id="sliderY" min="-1.57" max="1.57" step="0.01">
+        <br>
+        <div id="directions">
+            <p>*Click and drag to move around the planets*</p>
+            <p>*Arrows to zoom in/out*</p>
+        </div>
+        <br>
+        <br>
         <label class="container" id="Sim">SIM:
             <input type="checkbox" id="sim" name="sim">
             <span class="checkmark" id="simSwitch"></span>
         </label>
-        <div id="specific_text">
-            <h2>Running:</h2>
-            <p>I ran varisty all four years of High School in both Cross Country and Track.</p>
-            <p>I was both a XC and Track captain as well.</p
-            <h3>PRs</h3>
-            <li>3 mile: 16:17</li>
-            <li>1600m: 4:45</li>
-            <li>800m: 2:01</li>
-            <li>400m: 51.5</li>
-            <br>
-            <h2>Band:</h2>
-            <p>My primary instrument is the trumpet.</p>
-            <p>Over my high school career, I've been in the Marching Band for 4 years, Jazz Band for 4 years, Wind Ensemble for 2 years, and Pep/Concert Band for 4 years.</p>
-            <p>Senior year, I was chosen as High Brass Section Leader, which has put me into a leadership role within the band.</p>
-            <p>Favorite Marching Show to have been apart of: "Through the Lens" (2022)</p>
-            <h2>School:</h2>
-            <h3>Accomplishments & Awards:</h3>
-            <li>Valedictorian (Class of 2023)</li>
-            <li>Illinois State Scholar</li>
-            <li>WHS Student of the Month</li>
-            <li>WHS Athlete of the Month</li>
-            <li>MVC Academic All-Conference</li>
-            <br>
+        <div id="projects">
+            <h2>Projects</h2>
+            <h3>Touch Sensitive Epoxy Resin Coffee Table</h3>
+            <p>Last summer I decided to finally make an epoxy resin table. I had gotten sucked down the woodworking youtube rabbit-hole a few months before hand (shoutout to BlackTail Studios). This inspired me to make my own epoxy resin table, but seeing as I didn't have the skills nor the funds to make a full table I settled on a 14" x 16" coffee table.</p>
+            <p>The table-top is made from a fallen tree behind my house and 2 part deep pour epoxy resin. I took a cross section from the tree and split it down the middle to make a mirrored effect with the blue epoxy "river" flowing through the middle. To make room for the electronics on the underside of the table, I routered a series of channels and holes near the edge of the wood.</p>
+            <p>The electronics underneath the table are controlled by two Arduino Nanos that each control 25 LEDs and 10 ttp223 capacitative touch sensors. The code running on the Arduinos constantly change the color of the LEDs, but is only visible when a sensor is tripped by the touch of a hand or some metallic object.</p>
+            <img src="/Imgs/Table_w/_Bottle.jpeg">
+            <img src="/Imgs/Table_Finish.jpeg">
+            <video id="vid" autoplay>
+                <source src="/Videos/Table_Hand.mp4" type="video/mp4">
+            </video>
         </div>
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
     <script src="Portfolio.js"></script>
-    <script>alert("NOTICE: Webpage is currently under construction");</script>
+    <script>
+        window.onscroll = function() {myFunction()};
+
+        const navbar = document.getElementById("navbar");
+        const sticky = navbar.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky");
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+        let vid = document.getElementById("vid");
+        vid.loop = true;
+        vid.muted = true;
+    </script>
 </body>
 </html>
