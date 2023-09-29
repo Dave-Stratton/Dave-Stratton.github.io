@@ -11,7 +11,7 @@
         }
         body {
             margin: 0;
-            background-color: black;
+            background: linear-gradient(gray, black, gray);
         }
         nav {
             position: absolute;
@@ -34,7 +34,7 @@
         nav p {
             display: inline;
             position: relative;
-            left: 35%;
+            left: 20%;
         }
         .sticky {
             position: fixed;
@@ -56,16 +56,18 @@
             width: 80vw;
             left: 20vw;
             height: 100vh;
+            z-index: initial;
         }
         #text {
             color: white;
             position: absolute;
             top: 10px;
             font-size: 16pt;
+            padding: 20px;
         }
         #about {
             font-style: bold;
-            padding-left: 15px;
+            padding-left: 20px;
             text-shadow: 2px 2px 5px rgba(211, 211, 211, 0.932);
        }
        #about h1 {
@@ -75,7 +77,7 @@
            position: relative;
             left: 50vw;
             width: 50vw;
-            top: 250px;
+            top: 16vh;
        }
         #revealButton {
             width: 150px;
@@ -144,6 +146,10 @@
             -ms-transform: rotate(45deg);
             transform: rotate(45deg);
         }
+        #planetButtons {
+            position: relative;
+            top: -200px;
+        }
         #simSwitch {
             border-radius: 0%;
             width: 37px;
@@ -163,11 +169,11 @@
         }
         #directions {
             visibility: hidden;
+            position: relative;
+            top: -200px;
         }
         #projects {
-            position: absolute;
-            top: 110vh;
-            background: linear-gradient(black, rgb(110, 110, 110));
+            position: relative;
             width: 100vw;
         }
         #projects img{
@@ -186,7 +192,7 @@
     <nav id="navbar">
         <a href="#text">About</a>
         <a href="#projects">Projects</a>
-        <a href="academics">Academics</a>
+        <a href="#academics">Academics</a>
         <p>Contact: strattml@rose-hulman.edu or mlstratton11@gmail.com</p>
     </nav>
     <div id="text">
@@ -222,7 +228,6 @@
             <span class="checkmark"></span>
         </label>
         </div>
-        <br>
         <div id="directions">
             <p>*Click and drag to move around the planets*</p>
             <p>*Arrows to zoom in/out*</p>
@@ -241,13 +246,27 @@
             <p>The electronics underneath the table are controlled by two Arduino Nanos that each control 25 LEDs and 10 ttp223 capacitative touch sensors. The code running on the Arduinos constantly change the color of the LEDs, but is only visible when a sensor is tripped by the touch of a hand or some metallic object.</p>
             <img src="/Imgs/Bottle.jpeg">
             <img src="/Imgs/Table_Finish.jpeg">
-            <video id="vid" autoplay>
+            <video class="vid" autoplay>
                 <source src="/Videos/Table_Hand.mp4" type="video/mp4">
             </video>
             <h3>Electromography Sensor with Arduino</h3>
             <p>I've done multiple small projects with a MyoWare EMG sensor with an arduino to control servos, LEDs, and relays.</p>
             <p>The most fun project I've done that involved the EMG sensor was using the position of my arm to control the position of a metal rod. As I used my bicep to raise my forearm, a servo motor attachted to the metal rod would raise the rod, mimicing the movement of my arm.</p>
             <h3>Magic Mirror</h3>
+            <p>My first larger scale involving electronics was a "Magic Mirror" that was a computer monitor, behind a two way mirror, running a program running off a Raspberry Pi.</p>
+            <p>The mirror is inside a frame I made from some scrap wood from a house being rennovated down the street. The mirror displays the current date, upcomming holidays, weather, a nice message, and news headlines from the New York Times.</p>
+            <img src="Imgs/Magic_Mirror.jpg">
+        </div>
+        <div id="academics">
+            <h2>Academics</h2>
+            <p>I'm currently pursuing a Bachelors of Science degree in Mechanical Engineering with a minor in Spanish at Rose-Hulman Institute of Technology</p>
+            <h3>Accomplishments & Awards:</h3>
+            <li>Valedictorian (Class of 2023)</li>
+            <li>Illinois State Scholar</li>
+            <li>WHS Student of the Month</li>
+            <li>WHS Athlete of the Month</li>
+            <li>MVC Academic All-Conference</li>
+            <a href="Resume(1).pdf"><p style="color: yellow">Here's a link to my resume!</p></a>
         </div>
     </div>
     
@@ -267,9 +286,11 @@
             }
         }
 
-        let vid = document.getElementById("vid");
-        vid.loop = true;
-        vid.muted = true;
+        let vid = document.getElementsByClassName("vid");
+        for (let i = 0; i < vid.length; i++) {
+            vid[i].loop = true;
+            vid[i].muted = true;
+        }
     </script>
 </body>
 </html>

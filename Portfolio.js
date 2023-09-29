@@ -247,6 +247,8 @@ function animate() {
     sphere.position.x = 30 * Math.cos(deg);
     sphere.position.z = 30 * Math.sin(deg);
     if (simCheck == true) {
+        document.getElementById("swipeZone").style.zIndex = "100";
+        document.getElementById("simSwitch").style.zIndex = "101";
         let preState = state;
         overRuleViewPoint();
         if (state != preState) {
@@ -291,6 +293,8 @@ function animate() {
     }
     else {
         let k =1;
+        document.getElementById("swipeZone").style.zIndex = "initial";
+        document.getElementById("sim").style.zIndex = "initial";
         camera.position.x = 35 * Math.cos(deg - 0.1);
         camera.position.z = 35 * Math.sin(deg - 0.1);
         camera.position.y = 2;
