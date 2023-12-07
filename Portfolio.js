@@ -62,6 +62,32 @@ function keyCheckUp() {
     document.body.classList.remove("stop-scrolling");
 }
 
+window.addEventListener("mousemove", function (event) {
+    let x = event.clientX;
+    let y = event.clientY;
+
+    document.getElementById("planetIndicator").style = `position: absolute; left: ${x}px; top: ${y}px;`
+    //document.getElementById("myCircleText").innerText = `x: ${x}, y:${y}`;
+})
+
+// Make rayCaster stuff
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+function onPointerMove( event ) {
+
+    // calculate pointer position in normalized device coordinates
+    // (-1 to +1) for both components
+
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+}
+
+window.addEventListener( 'pointermove', onPointerMove );
+
+window.addEventListener( 'mousedown', assignState );
+
 
 function init() {
     scene = new THREE.Scene();
@@ -87,6 +113,7 @@ function init() {
     sphere.position.set(0,0,0);
     sphere.roughness = 1;
     sphere.metalness = 1;
+    sphere.name = "Earth";
     scene.add(sphere);
 
     const sunTexture = new THREE.TextureLoader().load('/Imgs/Sun2Map.jpeg');
@@ -95,6 +122,7 @@ function init() {
     sun = new THREE.Mesh(sunGeo, sunMaterial);
     sun.position.set (0,0,0);
     sun.metalness = 1;
+    sun.name = "Sun";
     scene.add(sun);
 
     const venusTexture = new THREE.TextureLoader().load('/Imgs/VenusMap.jpeg');
@@ -102,6 +130,7 @@ function init() {
     const venusMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: venusTexture});
     venus = new THREE.Mesh(venusGeo, venusMaterial);
     venus.position.set(0,0,17);
+    venus.name = "Venus";
     scene.add(venus);
 
     const mercuryTexture = new THREE.TextureLoader().load('/Imgs/MercuryMap.png');
@@ -109,6 +138,7 @@ function init() {
     const mercuryMaterial = new THREE.MeshStandardMaterial({color: 0xfffffff, map:mercuryTexture});
     mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
     mercury.position.set(0,0,11);
+    mercury.name = "Mercury";
     scene.add(mercury);
 
     const moonTexture = new THREE.TextureLoader().load('/Imgs/MoonTexture.jpeg');
@@ -116,6 +146,9 @@ function init() {
     const moonMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: moonTexture});
     moon = new THREE.Mesh(moonGeo, moonMaterial);
     moon.position.set(0,0,0);
+    moon.roughness = 1;
+    moon.metalness = 0;
+    moon.name = "Moon";
     scene.add(moon);
 
     pointLight = new THREE.PointLight(0xffffff, 3);
@@ -188,7 +221,7 @@ function init() {
  
 }
 
-function overRuleViewPoint() {
+/*function overRuleViewPoint() {
     let earthCheck = document.getElementById("checkEarth").checked;
     let venusCheck = document.getElementById("checkVenus").checked;
     let mercuryCheck = document.getElementById("checkMercury").checked;
@@ -225,7 +258,65 @@ function overRuleViewPoint() {
     else if (state == "mercury") {
         document.getElementById("checkMercury").checked = true;
     }
-    console.log(state);
+    //console.log(state);
+}*/
+
+function checkRays() {
+    let pI = document.getElementById("planetIndicator");
+    raycaster.setFromCamera(pointer, camera);
+    let intersects = raycaster.intersectObjects( scene.children );
+
+    if (intersects.length > 0) {
+        for (let i = 0; i < intersects.length; i++) {
+            if (intersects[i].object.name == "Earth") {
+                pI.innerText = "Earth";
+                pI.style.color = "#55ff66";
+            }
+            else if (intersects[i].object.name == "Venus") {
+                pI.innerText = "Venus";
+                pI.style.color = "red";
+            }
+            else if (intersects[i].object.name == "Mercury") {
+                pI.innerText = "Mercury";
+                pI.style.color = "lightblue";
+            }
+            else if (intersects[i].object.name == "Sun") {
+                pI.innerText = "Sun";
+                pI.style.color = "white";
+            }
+            else if (intersects[i].object.name == "Moon") {
+                pI.innerText = "Moon";
+                pI.style.color = "#dddddd";
+            }
+        }
+    }
+    else {
+        document.getElementById("planetIndicator").innerText = "";
+    }
+}
+
+function assignState() {
+    let preState = state;
+    if (document.getElementById("planetIndicator").innerText == "Earth") {
+        state = "earth";
+    }
+    else if (document.getElementById("planetIndicator").innerText == "Venus") {
+        state = "venus";
+    }
+    else if (document.getElementById("planetIndicator").innerText == "Mercury") {
+        state = "mercury";
+    }
+    else if (document.getElementById("planetIndicator").innerText == "Sun") {
+        state = "sun";
+    }
+    else if (document.getElementById("planetIndicator").innerText == "Moon") {
+        state = "moon";
+    }
+    if (preState != state) {
+        pos_y = 2;
+        rad = 4.5;
+        swayDeg = -1;
+    }
 }
 
 function animate() {
@@ -242,53 +333,60 @@ function animate() {
     else if(keyPressed == 40) {
         rad += 0.25;
     }
-    let simCheck = document.getElementById("sim").checked;
+
     sphere.rotation.y += 0.01;
     sphere.position.x = 30 * Math.cos(deg);
     sphere.position.z = 30 * Math.sin(deg);
+
+    let simCheck = document.getElementById("sim").checked;
     if (simCheck == true) {
         document.getElementById("swipeZone").style.zIndex = "100";
         document.getElementById("simSwitch").style.zIndex = "101";
-        let preState = state;
-        overRuleViewPoint();
-        if (state != preState) {
-            pos_y = 2;
-            rad = 4.5;
-            swayDeg = -1;
-        }
-        document.getElementById("earthDiv").style.visibility = "visible";
-        document.getElementById("venusDiv").style.visibility = "visible";
-        document.getElementById("mercuryDiv").style.visibility = "visible";
+        document.getElementById("planetIndicator").style.visibility = "visible";
+        //overRuleViewPoint();
+        checkRays();
+        //document.getElementById("earthDiv").style.visibility = "visible";
+        //document.getElementById("venusDiv").style.visibility = "visible";
+        //document.getElementById("mercuryDiv").style.visibility = "visible";
         document.getElementById("simSwitch").innerHTML = "ON";
         document.getElementById("directions").style.visibility = "visible";
         document.getElementById("about").style.visibility = "hidden";
-        if (document.getElementById("checkEarth").checked == true) {
+        //if (document.getElementById("checkEarth").checked == true) {
+        if (state == "earth") {
             let k = 1;
             camera.position.x = sphere.position.x + (rad*Math.cos(deg + parseFloat(swayDeg)));
             camera.position.z = sphere.position.z + (rad*Math.sin(deg + parseFloat(swayDeg)));
             camera.position.y = pos_y;
             camera.lookAt(sphere.position.x,0,sphere.position.z);
         }
-        else if (document.getElementById("checkVenus").checked == true) {
+        //else if (document.getElementById("checkVenus").checked == true) {
+        else if (state == "venus") {
             let k =1;
             camera.position.x = venus.position.x + (rad*Math.cos(Vdeg + parseFloat(swayDeg)));
             camera.position.z = venus.position.z + (rad*Math.sin(Vdeg + parseFloat(swayDeg)));
             camera.position.y = pos_y;
             camera.lookAt(venus.position.x, 0, venus.position.z);
         }
-        else if (document.getElementById("checkMercury").checked == true) {
+        else if (state == "mercury") {
             let k =1;
             camera.position.x = mercury.position.x + (rad*Math.cos(Mdeg + parseFloat(swayDeg)));
             camera.position.z = mercury.position.z + (rad*Math.sin(Mdeg + parseFloat(swayDeg)));
             camera.position.y = pos_y;
             camera.lookAt(mercury.position.x, 0, mercury.position.z);
         }
-        else {
+        else if (state == "sun") {
             k = 2;
             camera.position.x = (40+rad) * Math.cos(parseFloat(swayDeg));
             camera.position.z = (40+rad) * Math.sin(parseFloat(swayDeg));
             camera.position.y = pos_y;
             camera.lookAt(0,0,0);
+        }
+        else if (state == "moon") {
+            k = 0.1;
+            camera.position.x = moon.position.x + (rad*Math.cos( (2*deg) + parseFloat(swayDeg) ));
+            camera.position.y = moon.position.y + pos_y - 1.5;
+            camera.position.z = moon.position.z + (rad*Math.sin( (2*deg) + parseFloat(swayDeg) ))
+            camera.lookAt(moon.position.x, moon.position.y, moon.position.z);
         }
     }
     else {
@@ -299,12 +397,13 @@ function animate() {
         camera.position.z = 35 * Math.sin(deg - 0.1);
         camera.position.y = 2;
         camera.lookAt(sphere.position.x, 0, sphere.position.z);
-        document.getElementById("earthDiv").style.visibility = "hidden";
-        document.getElementById("venusDiv").style.visibility = "hidden";
-        document.getElementById("mercuryDiv").style.visibility = "hidden";
+        //document.getElementById("earthDiv").style.visibility = "hidden";
+        //document.getElementById("venusDiv").style.visibility = "hidden";
+        //document.getElementById("mercuryDiv").style.visibility = "hidden";
         document.getElementById("simSwitch").innerHTML = "OFF";
         document.getElementById("directions").style.visibility = "hidden";
         document.getElementById("about").style.visibility = "visible";
+        document.getElementById("planetIndicator").style.visibility = "hidden";
         rad = 5;
     }
     //testSphere.position.x = sphere.position.x + (3*Math.cos(deg + parseFloat(swayDeg)));
@@ -330,6 +429,7 @@ function animate() {
     Vdeg += 0.012;
     Mdeg += 0.02;
     //camera.lookAt(0,0,0);
+
     renderer.render(scene, camera);
     //console.log("Sphere X: " + sphere.position.x, "Sphere Z: " + sphere.position.z, "Moon X: " + moon.position.x, "Moon Z: " + moon.position.z);
     //console.log("value:" + swayDeg + "X:" + testSphere.position.x, "Z:" + testSphere.position.z);
