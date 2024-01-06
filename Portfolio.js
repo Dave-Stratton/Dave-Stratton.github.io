@@ -4,6 +4,12 @@ let deg = 0;
 let Vdeg = 0;
 let Mdeg = 0;
 let Ydeg = 0;
+let marsDeg = 0;
+let jupiterDeg = 0;
+let saturnDeg = 7*Math.PI/6;
+let uranusDeg = Math.PI/1.5;
+let neptuneDeg = -1*Math.PI/4
+let plutoDeg = 0;
 let radius = 40;
 let rad = 4.5;
 let swayDeg = -1;
@@ -117,7 +123,7 @@ function init() {
     scene.add(sphere);
 
     const sunTexture = new THREE.TextureLoader().load('/Imgs/Sun2Map.jpeg');
-    const sunGeo = new THREE.SphereGeometry(4.5, 32, 16);
+    const sunGeo = new THREE.SphereGeometry(10, 32, 16);
     const sunMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: sunTexture});
     sun = new THREE.Mesh(sunGeo, sunMaterial);
     sun.position.set (0,0,0);
@@ -125,7 +131,7 @@ function init() {
     sun.name = "Sun";
     scene.add(sun);
 
-    const venusTexture = new THREE.TextureLoader().load('/Imgs/VenusMap.jpeg');
+    const venusTexture = new THREE.TextureLoader().load('/Imgs/VenusMap2.jpg');
     const venusGeo = new THREE.SphereGeometry(1.5, 32, 16);
     const venusMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: venusTexture});
     venus = new THREE.Mesh(venusGeo, venusMaterial);
@@ -151,32 +157,90 @@ function init() {
     moon.name = "Moon";
     scene.add(moon);
 
+    const marsTexture = new THREE.TextureLoader().load('/Imgs/Mars_Map.webp');
+    const marsGeo = new THREE.SphereGeometry(1.75, 32, 16);
+    const marsMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: marsTexture});
+    mars = new THREE.Mesh(marsGeo, marsMaterial);
+    mars.position.set(0,0,0);
+    mars.name = "Mars";
+    scene.add(mars);
+
+    const jupiterTexture = new THREE.TextureLoader().load('/Imgs/Jupiter_map.jpg');
+    const jupiterGeo = new THREE.SphereGeometry(5, 32, 16);
+    const jupiterMaterial = new THREE.MeshStandardMaterial({color: 0xaaaaaa, map: jupiterTexture});
+    jupiter = new THREE.Mesh(jupiterGeo, jupiterMaterial);
+    jupiter.position.set(0,0,0);
+    jupiter.name = "Jupiter";
+    scene.add(jupiter);
+
+    const saturnTexture = new THREE.TextureLoader().load('/Imgs/SaturnMap.jpg');
+    const saturnGeo = new THREE.SphereGeometry(4.5, 32, 16);
+    const saturnMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: saturnTexture});
+    saturn = new THREE.Mesh(saturnGeo, saturnMaterial);
+    saturn.position.set(0,0,0);
+    saturn.name = "Saturn";
+    scene.add(saturn);
+    const saturnRingTexture = new THREE.TextureLoader().load('/Imgs/SaturnRingMap2.png');
+    const saturnRingGeo = new THREE.RingGeometry(5.5, 7, 32);
+    const saturnRingMaterial = new THREE.MeshStandardMaterial({color: 0xffffaa, side: THREE.DoubleSide, map:saturnRingTexture});
+    saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMaterial);
+    saturnRing.rotation.x = (Math.PI)/2;
+    scene.add(saturnRing);
+
+    const uranusTexture = new THREE.TextureLoader().load('/Imgs/UranusMap.jpg');
+    const uranusGeo = new THREE.SphereGeometry(3.5, 32, 16);
+    const uranusMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map:uranusTexture});
+    uranus = new THREE.Mesh(uranusGeo, uranusMaterial);
+    uranus.position.set(0,0,0);
+    uranus.name = "Uranus";
+    scene.add(uranus);
+    const uranusRingTexture = new THREE.TextureLoader().load('/Imgs/UranusRingMap.jpg');
+    const uranusRingGeo = new THREE.RingGeometry(4.5, 5.25, 32, 16);
+    const uranusRingMaterial = new THREE.MeshStandardMaterial({color: 0x99aaff, side: THREE.DoubleSide, metalness: 0.5});
+    uranusRing = new THREE.Mesh(uranusRingGeo, uranusRingMaterial);
+    scene.add(uranusRing);
+
+    const neptuneTexture = new THREE.TextureLoader().load('Imgs/neptuneMap.png');
+    const neptuneGeo = new THREE.SphereGeometry(2.75, 32, 16);
+    const neptuneMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map:neptuneTexture});
+    neptune = new THREE.Mesh(neptuneGeo, neptuneMaterial);
+    neptune.position.set(0,0,0);
+    neptune.name = "Neptune";
+    scene.add(neptune);
+    
+    const plutoTexture = new THREE.TextureLoader().load('/Imgs/plutoMap.jpg');
+    const plutoGeo = new THREE.SphereGeometry(0.75, 32, 16);
+    const plutoMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, map: plutoTexture});
+    pluto = new THREE.Mesh(plutoGeo, plutoMaterial);
+    pluto.name = "Pluto";
+    scene.add(pluto);
+
     pointLight = new THREE.PointLight(0xffffff, 3);
     pointLight.position.set(0, 0, 0);
     const lightHelper = new THREE.PointLightHelper(pointLight);
     //scene.add(pointLight);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.875);
     scene.add(ambientLight);
     const gridHelper = new THREE.GridHelper(100, 10);
     //scene.add(gridHelper);
 
     sunLight1 = new THREE.PointLight(0xffffff, 0.5);
-    sunLight1.position.set(0,10,0);
+    sunLight1.position.set(0,20,0);
     scene.add(sunLight1);
     sunLight2 = new THREE.PointLight(0xffffff, 0.5);
-    sunLight2.position.set(10,0,0);
+    sunLight2.position.set(20,0,0);
     scene.add(sunLight2);
     sunLight3 = new THREE.PointLight(0xffffff, 0.5);
-    sunLight3.position.set(-10,0,0);
+    sunLight3.position.set(-20,0,0);
     scene.add(sunLight3);
     sunLight4 = new THREE.PointLight(0xffffff, 0.5);
-    sunLight4.position.set(0,0,10);
+    sunLight4.position.set(0,0,20);
     scene.add(sunLight4);
     sunLight5 = new THREE.PointLight(0xffffff, 0.5);
-    sunLight5.position.set(0,0,-10);
+    sunLight5.position.set(0,0,-20);
     scene.add(sunLight5);
     sunLight6 = new THREE.PointLight(0xffffff, 0.5);
-    sunLight6.position.set(0,-10,0);
+    sunLight6.position.set(0,-20,0);
     scene.add(sunLight6);
 
 
@@ -190,33 +254,33 @@ function init() {
     const starMaterial = new THREE.MeshStandardMaterial({color: 0xfff987});
     for (let i = 1; i <= 120; i++) {
         star = new THREE.Mesh(starGeo, starMaterial);
-        let randX = 75 * Math.cos(Math.random() * Math.PI);
+        let randX = 100 * Math.cos(Math.random() * Math.PI);
         let randY = Math.random();
         let x, z;
         if (randX >= 0 && randY > 0.5) {
             x = randX + (Math.random() * 200);
-            z = Math.sqrt((75**2) - (randX**2)) + (Math.random() * 200);
+            z = Math.sqrt((100**2) - (randX**2)) + (Math.random() * 200);
         }
         else if (randX >= 0 && randY <= 0.5) {
             x = randX + (Math.random() * 200);
-            z = -1 * Math.sqrt((75**2) - (randX**2)) - (Math.random() * 200);
+            z = -1 * Math.sqrt((100**2) - (randX**2)) - (Math.random() * 200);
         }
         else if (randX < 0 && randY > 0.5) {
             x = randX - (Math.random() * 200);
-            z = Math.sqrt((75**2) - (randX**2)) + (Math.random() * 200);
+            z = Math.sqrt((100**2) - (randX**2)) + (Math.random() * 200);
         }
         else if (randX < 0 && randY ) {
             x = randX - (Math.random() * 200);
-            z = -1 * Math.sqrt((75**2) - (randX**2)) - (Math.random() * 200);
+            z = -1 * Math.sqrt((100**2) - (randX**2)) - (Math.random() * 200);
         }
-        let y = Math.floor(30 * Math.sin(Math.random() * 2 * Math.PI));
+        let y = Math.floor(40 * Math.sin(Math.random() * 2 * Math.PI));
         star.position.set(x, y, z);
         if (i % 4) {
-           starLight = new THREE.PointLight(0xffffff, 0.025);
+           starLight = new THREE.PointLight(0xffffff, 0.005);
            starLight.position.set(x,y,z);
         }
         scene.add(star, starLight);
-        console.log(star.position);
+        //console.log(star.position);
     }
  
 }
@@ -288,6 +352,30 @@ function checkRays() {
                 pI.innerText = "Moon";
                 pI.style.color = "#dddddd";
             }
+            else if (intersects[i].object.name == "Mars") {
+                pI.innerText = "Mars";
+                pI.style.color = "#ff9900";
+            }
+            else if (intersects[i].object.name == "Jupiter") {
+                pI.innerText = "Jupiter";
+                pI.style.color = "#ffff00";
+            }
+            else if (intersects[i].object.name == "Saturn") {
+                pI.innerText = "Saturn";
+                pI.style.color = "#ffff99";
+            }
+            else if (intersects[i].object.name == "Uranus") {
+                pI.innerText = "Uranus";
+                pI.style.color = "#77aaff";
+            }
+            else if (intersects[i].object.name == "Neptune") {
+                pI.innerText = "Neptune";
+                pI.style.color = "#0044ff";
+            }
+            else if (intersects[i].object.name == "Pluto") {
+                pI.innerText = "Pluto";
+                pI.style.color = "#bb33ff";
+            }
         }
     }
     else {
@@ -297,24 +385,49 @@ function checkRays() {
 
 function assignState() {
     let preState = state;
-    if (document.getElementById("planetIndicator").innerText == "Earth") {
+    let PIText = document.getElementById("planetIndicator").innerText;
+    if (PIText == "Earth") {
         state = "earth";
     }
-    else if (document.getElementById("planetIndicator").innerText == "Venus") {
+    else if (PIText == "Venus") {
         state = "venus";
     }
-    else if (document.getElementById("planetIndicator").innerText == "Mercury") {
+    else if (PIText == "Mercury") {
         state = "mercury";
     }
-    else if (document.getElementById("planetIndicator").innerText == "Sun") {
+    else if (PIText == "Sun") {
         state = "sun";
     }
-    else if (document.getElementById("planetIndicator").innerText == "Moon") {
+    else if (PIText == "Moon") {
         state = "moon";
+    }
+    else if (PIText == "Mars") {
+        state = "mars";
+    }
+    else if (PIText == "Jupiter") {
+        state = "jupiter";
+    }
+    else if (PIText == "Saturn") {
+        state = "saturn";
+    }
+    else if (PIText == "Uranus") {
+        state = "uranus";
+    }
+    else if (PIText == "Neptune") {
+        state = "neptune";
+    }
+    else if (PIText == "Pluto") {
+        state = "pluto";
     }
     if (preState != state) {
         pos_y = 2;
         rad = 4.5;
+        if (PIText == "Jupiter" || PIText == "Saturn" || PIText == "Uranus") {
+            rad = 10;
+        }
+        else if (PIText == "Neptune") {
+            rad = 7;
+        }
         swayDeg = -1;
     }
 }
@@ -335,8 +448,8 @@ function animate() {
     }
 
     sphere.rotation.y += 0.01;
-    sphere.position.x = 30 * Math.cos(deg);
-    sphere.position.z = 30 * Math.sin(deg);
+    sphere.position.x = 40 * Math.cos(deg);
+    sphere.position.z = 40 * Math.sin(deg);
 
     let simCheck = document.getElementById("sim").checked;
     if (simCheck == true) {
@@ -388,13 +501,55 @@ function animate() {
             camera.position.z = moon.position.z + (rad*Math.sin( (2*deg) + parseFloat(swayDeg) ))
             camera.lookAt(moon.position.x, moon.position.y, moon.position.z);
         }
+        else if (state == "mars") {
+            k = 1;
+            camera.position.x = mars.position.x + (rad*Math.cos(marsDeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
+            camera.position.z = mars.position.z + (rad*Math.sin(marsDeg + parseFloat(swayDeg)));
+            camera.lookAt(mars.position.x, mars.position.y, mars.position.z);
+        }
+        else if (state == "jupiter") {
+            k = 1;
+            camera.position.x = jupiter.position.x + (rad*Math.cos(jupiterDeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
+            camera.position.z = jupiter.position.z + (rad*Math.sin(jupiterDeg + parseFloat(swayDeg)));
+            camera.lookAt(jupiter.position.x, jupiter.position.y, jupiter.position.z);
+        }
+        else if (state == "saturn") {
+            k = 1;
+            camera.position.x = saturn.position.x + (rad*Math.cos(saturnDeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
+            camera.position.z = saturn.position.z + (rad*Math.sin(saturnDeg + parseFloat(swayDeg)));
+            camera.lookAt(saturn.position.x, saturn.position.y, saturn.position.z);
+        }
+        else if (state == "uranus") {
+            k = 1;
+            camera.position.x = uranus.position.x + (rad*Math.cos(uranusDeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
+            camera.position.z = uranus.position.z + (rad*Math.sin(uranusDeg + parseFloat(swayDeg)));
+            camera.lookAt(uranus.position.x, uranus.position.y, uranus.position.z);
+        }
+        else if (state == "neptune") {
+            k = 1;
+            camera.position.x = neptune.position.x + (rad*Math.cos(neptuneDeg + parseFloat(swayDeg)));
+            camera.position.y = pos_y;
+            camera.position.z = neptune.position.z + (rad*Math.sin(neptuneDeg + parseFloat(swayDeg)));
+            camera.lookAt(neptune.position.x, neptune.position.y, neptune.position.z);
+        }
+        else if (state == "pluto") {
+            k = 0.1;
+            camera.position.x = pluto.position.x + (rad*Math.cos(plutoDeg + parseFloat(swayDeg)));
+            camera.position.y = pluto.position.y + pos_y;
+            camera.position.z = pluto.position.z + (rad*Math.sin(plutoDeg + parseFloat(swayDeg)));
+            camera.lookAt(pluto.position.x, pluto.position.y, pluto.position.z);
+        }
     }
     else {
         let k =1;
         document.getElementById("swipeZone").style.zIndex = "initial";
         document.getElementById("sim").style.zIndex = "initial";
-        camera.position.x = 35 * Math.cos(deg - 0.1);
-        camera.position.z = 35 * Math.sin(deg - 0.1);
+        camera.position.x = 45 * Math.cos(deg - 0.1);
+        camera.position.z = 45 * Math.sin(deg - 0.1);
         camera.position.y = 2;
         camera.lookAt(sphere.position.x, 0, sphere.position.z);
         //document.getElementById("earthDiv").style.visibility = "hidden";
@@ -413,11 +568,35 @@ function animate() {
     moon.position.y = 1.3*Math.sin(deg);
     //pointLight.position.x = 10 * Math.cos(deg-0.1);
     //pointLight.position.z = 10 * Math.sin(deg-0.1);
-    venus.position.x = 17 * Math.cos(Vdeg);
-    venus.position.z = 17 * Math.sin(Vdeg);
-    mercury.position.x = 11 * Math.cos(Mdeg);
-    mercury.position.z = 11 * Math.sin(Mdeg);
+    venus.position.x = 27 * Math.cos(Vdeg);
+    venus.position.z = 27 * Math.sin(Vdeg);
+    mercury.position.x = 21 * Math.cos(Mdeg);
+    mercury.position.z = 21 * Math.sin(Mdeg);
     mercury.rotation.y -= 0.02;
+    mars.position.x = 55 * Math.cos(marsDeg);
+    mars.position.z = 55 * Math.sin(marsDeg);
+    mars.rotation.y += 0.01;
+    jupiter.position.x = 70 * Math.cos(jupiterDeg);
+    jupiter.position.z = 70 * Math.sin(jupiterDeg);
+    jupiter.rotation.y += 0.0005
+    saturn.position.x = 90 * Math.cos(saturnDeg);
+    saturn.position.z = 90 * Math.sin(saturnDeg);
+    saturn.rotation.y += 0.001;
+    saturnRing.position.x = saturn.position.x;
+    saturnRing.position.z = saturn.position.z;
+    uranus.position.x = 105 * Math.cos(uranusDeg);
+    uranus.position.z = 105 * Math.sin(uranusDeg);
+    uranus.rotation.y += 0.003;
+    uranusRing.position.x = uranus.position.x;
+    uranusRing.position.z = uranus.position.z;
+    uranusRing.rotation.x = Math.PI/4;
+    neptune.position.x = 120 * Math.cos(neptuneDeg);
+    neptune.position.z = 120 * Math.sin(neptuneDeg);
+    neptune.rotation.y += 0.005;
+    let plutoRad = (135*(1-((.15)**2)))/(1+(0.15*Math.cos(plutoDeg)));
+    pluto.position.x = (plutoRad) * Math.cos(plutoDeg)
+    pluto.position.y = (plutoRad) * Math.tan(17*Math.PI/180);
+    pluto.position.z = (plutoRad) * Math.sin(plutoDeg)
     //sphere.rotation.z += 0.01;
 
     if(deg < Math.PI * 2) {
@@ -428,8 +607,13 @@ function animate() {
     }
     Vdeg += 0.012;
     Mdeg += 0.02;
+    marsDeg += 0.005;
+    jupiterDeg += 0.00085;
+    saturnDeg += 0.00034;
+    uranusDeg += 0.00012;
+    neptuneDeg += 0.00000017;
+    plutoDeg += 0.00000011;
     //camera.lookAt(0,0,0);
-
     renderer.render(scene, camera);
     //console.log("Sphere X: " + sphere.position.x, "Sphere Z: " + sphere.position.z, "Moon X: " + moon.position.x, "Moon Z: " + moon.position.z);
     //console.log("value:" + swayDeg + "X:" + testSphere.position.x, "Z:" + testSphere.position.z);
