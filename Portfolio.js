@@ -581,9 +581,11 @@ function animate() {
     jupiter.rotation.y += 0.0005
     saturn.position.x = 90 * Math.cos(saturnDeg);
     saturn.position.z = 90 * Math.sin(saturnDeg);
+    saturn.position.y = -0.5;
     saturn.rotation.y += 0.001;
     saturnRing.position.x = saturn.position.x;
     saturnRing.position.z = saturn.position.z;
+    saturnRing.position.y = saturn.position.y;
     uranus.position.x = 105 * Math.cos(uranusDeg);
     uranus.position.z = 105 * Math.sin(uranusDeg);
     uranus.rotation.y += 0.003;
@@ -595,7 +597,7 @@ function animate() {
     neptune.rotation.y += 0.005;
     let plutoRad = (135*(1-((.15)**2)))/(1+(0.15*Math.cos(plutoDeg)));
     pluto.position.x = (plutoRad) * Math.cos(plutoDeg)
-    pluto.position.y = (plutoRad) * Math.tan(17*Math.PI/180);
+    pluto.position.y = (plutoRad) * Math.tan(Math.cos(plutoDeg)*(17*Math.PI/180));
     pluto.position.z = (plutoRad) * Math.sin(plutoDeg)
     //sphere.rotation.z += 0.01;
 
