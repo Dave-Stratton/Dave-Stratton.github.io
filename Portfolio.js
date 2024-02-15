@@ -16,6 +16,7 @@ let swayDeg = -1;
 let pos_y = 2;
 let state = "earth";
 let k = 1;
+let t = 1;
 
 // movement stuff
 let startX;
@@ -447,7 +448,7 @@ function animate() {
         rad += 0.25;
     }
 
-    sphere.rotation.y += 0.01;
+    sphere.rotation.y += t*0.01;
     sphere.position.x = 40 * Math.cos(deg);
     sphere.position.z = 40 * Math.sin(deg);
 
@@ -464,6 +465,11 @@ function animate() {
         document.getElementById("simSwitch").innerHTML = "ON";
         document.getElementById("directions").style.visibility = "visible";
         document.getElementById("about").style.visibility = "hidden";
+        document.getElementById("timeSliderDiv").style.visibility = "visible";
+        t = parseFloat(document.getElementById("timeSlider").value);
+        let timeFactor = Math.floor((365.25/10.33)*t);
+        document.getElementById("timeDisp").innerText = `${timeFactor} days/second`    
+
         //if (document.getElementById("checkEarth").checked == true) {
         if (state == "earth") {
             let k = 1;
@@ -559,7 +565,9 @@ function animate() {
         document.getElementById("directions").style.visibility = "hidden";
         document.getElementById("about").style.visibility = "visible";
         document.getElementById("planetIndicator").style.visibility = "hidden";
+        document.getElementById("timeSliderDiv").style.visibility = "hidden";
         rad = 5;
+        t = 1;
     }
     //testSphere.position.x = sphere.position.x + (3*Math.cos(deg + parseFloat(swayDeg)));
     //testSphere.position.z = sphere.position.z + (3*Math.sin(deg + parseFloat(swayDeg)));
@@ -572,29 +580,29 @@ function animate() {
     venus.position.z = 27 * Math.sin(Vdeg);
     mercury.position.x = 21 * Math.cos(Mdeg);
     mercury.position.z = 21 * Math.sin(Mdeg);
-    mercury.rotation.y -= 0.02;
+    mercury.rotation.y -= t*0.02;
     mars.position.x = 55 * Math.cos(marsDeg);
     mars.position.z = 55 * Math.sin(marsDeg);
-    mars.rotation.y += 0.01;
+    mars.rotation.y += t*0.01;
     jupiter.position.x = 70 * Math.cos(jupiterDeg);
     jupiter.position.z = 70 * Math.sin(jupiterDeg);
-    jupiter.rotation.y += 0.0005
+    jupiter.rotation.y += t*0.0005
     saturn.position.x = 90 * Math.cos(saturnDeg);
     saturn.position.z = 90 * Math.sin(saturnDeg);
     saturn.position.y = -0.5;
-    saturn.rotation.y += 0.001;
+    saturn.rotation.y += t*0.001;
     saturnRing.position.x = saturn.position.x;
     saturnRing.position.z = saturn.position.z;
     saturnRing.position.y = saturn.position.y;
     uranus.position.x = 105 * Math.cos(uranusDeg);
     uranus.position.z = 105 * Math.sin(uranusDeg);
-    uranus.rotation.y += 0.003;
+    uranus.rotation.y += t*0.003;
     uranusRing.position.x = uranus.position.x;
     uranusRing.position.z = uranus.position.z;
     uranusRing.rotation.x = Math.PI/4;
     neptune.position.x = 120 * Math.cos(neptuneDeg);
     neptune.position.z = 120 * Math.sin(neptuneDeg);
-    neptune.rotation.y += 0.005;
+    neptune.rotation.y += t*0.005;
     let plutoRad = (135*(1-((.15)**2)))/(1+(0.15*Math.cos(plutoDeg)));
     pluto.position.x = (plutoRad) * Math.cos(plutoDeg)
     pluto.position.y = (plutoRad) * Math.tan(Math.cos(plutoDeg)*(17*Math.PI/180));
@@ -602,19 +610,19 @@ function animate() {
     //sphere.rotation.z += 0.01;
 
     if(deg < Math.PI * 2) {
-        deg += 0.01;
+        deg += t*0.01;
     }
     else if (deg >= Math.PI * 2) {
         deg = 0;
     }
-    Vdeg += 0.012;
-    Mdeg += 0.02;
-    marsDeg += 0.005;
-    jupiterDeg += 0.00085;
-    saturnDeg += 0.00034;
-    uranusDeg += 0.00012;
-    neptuneDeg += 0.00000017;
-    plutoDeg += 0.00000011;
+    Vdeg += t*0.012;
+    Mdeg += t*0.02;
+    marsDeg += t*0.005;
+    jupiterDeg += t*0.00085;
+    saturnDeg += t*0.00034;
+    uranusDeg += t*0.00012;
+    neptuneDeg += t*0.00000017;
+    plutoDeg += t*0.00000011;
     //camera.lookAt(0,0,0);
     renderer.render(scene, camera);
     //console.log("Sphere X: " + sphere.position.x, "Sphere Z: " + sphere.position.z, "Moon X: " + moon.position.x, "Moon Z: " + moon.position.z);

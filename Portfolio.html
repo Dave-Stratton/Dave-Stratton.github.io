@@ -172,7 +172,7 @@
         #directions {
             visibility: hidden;
             position: relative;
-            top: 0px;
+            top: -100px;
         }
         #projects {
             position: relative;
@@ -188,6 +188,14 @@
         }
         #planetIndicator {
             text-shadow: white 2px 2px 5px;
+        }
+        #timeSliderDiv {
+            visibility: hidden;
+            position: relative;
+            top: -100px;
+        }
+        #timeSlider {
+            accent-color: rgb(9, 179, 9);
         }
        
     </style>
@@ -206,8 +214,9 @@
             <p>Hello, my name is Morgan Stratton. I'm a Mechanical Engineering student</p>
             <p>at Rose-Hulman Intstitute of Technology. I run Cross Country and Track</p>
             <p>here at Rose, as well as being a member of the Human Powered Vehicle team </p>
-            <p>and American Society of Mechanical Engineers. I started teaching myself how</p>
-            <p>to code back during covid and made this website as a fun and challenging project.</p>
+            <p>and the Treasurer of the American Society of Mechanical Engineers. I started</p>
+            <p>teaching myself how to code back during covid and made this website as a fun </p>
+            <p>and challenging project.</p>
             <br>
             <br>
             <div id="pg2">
@@ -237,6 +246,12 @@
         <div id="directions">
             <p>*Click and drag to move around the planets*</p>
             <p>*Arrows to zoom in/out*</p>
+        </div>
+        <div id="timeSliderDiv">
+            <label for="timeSlider">Time: </label>
+            <input type="range" min="0.05" max="10.35" step="0.0000001" value="1" id="timeSlider" name="timeSlider">
+            <p id="timeDisp">x speed</p>
+            <p>*Disclaimer* Rotational Period is not accurate</p>
         </div>
         <br>
         <br>
