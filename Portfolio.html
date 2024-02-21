@@ -11,13 +11,13 @@
         }
         body {
             margin: 0;
-            background: linear-gradient(rgb(109, 109, 109), rgb(36, 36, 36), rgb(109, 109, 109));
+            background: linear-gradient(rgb(36, 36, 36), rgb(109, 109, 109), rgb(36, 36, 36));
         }
         nav {
             position: absolute;
             z-index: 100;
             color: white;
-            background-color: rgb(185, 17, 17);
+            background-color: rgb(130, 10, 3);
             width: 100vw;
             height: 40px;
             font-size: 20pt;
@@ -176,7 +176,7 @@
         }
         #projects {
             position: relative;
-            width: 100vw;
+            width: auto;
             top: -100px;
         }
         #projects img{
@@ -231,20 +231,6 @@
             </div>
         </div>
         <h2 id="planetIndicator">Earth</h2>
-        <!--<div id="planetButtons">
-        <label class="container" id="earthDiv">Earth:  
-            <input type="checkbox" id="checkEarth" name="earth" checked="checked">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container" id="venusDiv">Venus:  
-            <input type="checkbox" id="checkVenus" name="venus">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container" id="mercuryDiv">Mercury:  
-            <input type="checkbox" id="checkMercury" name="mercury">
-            <span class="checkmark"></span>
-        </label>
-        </div>-->
         <div id="directions">
             <p>*Click and drag to move around the planets*</p>
             <p>*Arrows to zoom in/out*</p>
@@ -289,6 +275,7 @@
             <p>I'm currently pursuing a Bachelors of Science degree in Mechanical Engineering with a minor in Spanish at Rose-Hulman Institute of Technology</p>
             <h3>Accomplishments & Awards:</h3>
             <li>Valedictorian (Class of 2023)</li>
+            <li>Phi Gamma Delta: Most Outstanding GPA (Fall 2023)</li>
             <li>Illinois State Scholar</li>
             <li>WHS Student of the Month</li>
             <li>WHS Athlete of the Month</li>
@@ -312,6 +299,10 @@
                 navbar.classList.remove("sticky");
             }
         }
+
+        //Trying to give the bottom of the background a nice transition
+        let canvas = document.getElementsByTagName("canvas")[0];
+        canvas.style = "border-bottom: 20px whitesmoke double;";
 
         let vid = document.getElementsByClassName("vid");
         for (let i = 0; i < vid.length; i++) {

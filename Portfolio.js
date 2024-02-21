@@ -448,7 +448,7 @@ function animate() {
         rad += 0.25;
     }
 
-    sphere.rotation.y += t*0.01;
+    sphere.rotation.y += t*0.02;
     sphere.position.x = 40 * Math.cos(deg);
     sphere.position.z = 40 * Math.sin(deg);
 
